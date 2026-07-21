@@ -244,6 +244,14 @@
             box-shadow: 0 12px 40px rgba(0,0,0,0.08);
             background: #e8e0d8;
             position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+        .map-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.12);
         }
         .map-container img {
             width: 100%;
@@ -275,13 +283,27 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             pointer-events: none;
         }
+        .map-container .map-open-hint {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(255,255,255,0.9);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-family: 'Gravity', sans-serif;
+            font-size: clamp(0.6rem, 0.8vw, 0.8rem);
+            color: #1a1a1a;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            pointer-events: none;
+            letter-spacing: 0.04em;
+        }
 
         /* ===== ТАЙМИНГ (ОБЛАКА) ===== */
         .timing-grid {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: clamp(0.3rem, 0.8vh, 0.8rem); /* Отступы уменьшены в 2 раза */
+            gap: clamp(0.3rem, 0.8vh, 0.8rem);
             margin-top: 0.5rem;
             width: 100%;
         }
@@ -295,7 +317,7 @@
         .cloud-timing {
             position: relative;
             width: 100%;
-            max-width: 380px; /* Облака стали больше */
+            max-width: 380px;
             aspect-ratio: 1/1;
         }
         .cloud-timing img {
@@ -520,6 +542,7 @@
             .timer-circle:hover { box-shadow: 0 0 0 8px rgba(196,168,138,0.15); }
             .map-container { background: #3a2a20; }
             .map-container .map-address { background: rgba(30,30,30,0.9); color: #e0d0c0; }
+            .map-container .map-open-hint { background: rgba(30,30,30,0.9); color: #d0c0b0; }
             .contacts-number { border-color: #6a5a4a; background: rgba(255,255,255,0.05); color: #c0b0a0 !important; }
             .cloud-time, .cloud-label { color: #e8e0d8 !important; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
         }
@@ -561,16 +584,21 @@
             <h2 class="location-title fade-up">Место проведения</h2>
             <div class="location-name fade-up">White House</div>
             <div class="location-address fade-up">Городище (Щомыслицкий с/с), ул. Свободы, д.10</div>
-            <div class="map-container fade-scale">
-                <!-- Статичное изображение карты с меткой -->
+            <a 
+                href="https://yandex.by/maps/29630/minsk-district/house/Zk4YdQZoT00DQFtpfXRzeH9mYw==/?ll=27.318684%2C53.829357&z=16.17" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="map-container fade-scale"
+            >
                 <img 
-                    src="https://static-maps.yandex.ru/1.x/?ll=27.318684,53.829357&z=16&l=map&pt=27.318684,53.829357,pm2rdl" 
+                    src="https://static-maps.yandex.ru/1.x/?ll=27.318998,53.830404&z=16&l=map&pt=27.318998,53.830404,pm2rdl&size=500,500" 
                     alt="Карта места проведения" 
                     loading="lazy"
                 />
                 <div class="map-marker">📍</div>
                 <div class="map-address">ул. Свободы, 10, Городище</div>
-            </div>
+                <div class="map-open-hint">📌 Открыть в Яндекс.Картах</div>
+            </a>
         </div>
     </section>
 
