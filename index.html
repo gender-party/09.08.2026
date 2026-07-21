@@ -171,7 +171,7 @@
             word-break: break-word;
         }
 
-        .location-title, .wishes-title, .timer-title, .contacts-title, .final-title {
+        .location-title, .wishes-title, .timer-title, .contacts-title {
             font-family: 'Zeequada', cursive, serif;
             font-weight: 700;
             font-style: italic;
@@ -180,12 +180,6 @@
             letter-spacing: 0.12em;
             margin-bottom: 1.2rem;
             text-transform: uppercase;
-        }
-
-        .final-title {
-            font-size: clamp(2.2rem, 7vw, 5rem);
-            letter-spacing: 0.06em;
-            margin-bottom: 0;
         }
 
         .invitation-text, .wishes-text, .location-address, .contacts-text {
@@ -403,14 +397,42 @@
             word-break: break-word;
         }
 
-        /* ===== ФИНАЛЬНЫЙ БЛОК ===== */
+        /* ===== ФИНАЛЬНЫЙ БЛОК (с фото) ===== */
         .final-block {
-            padding: clamp(1.5rem, 4vh, 4rem) clamp(1rem, 5vw, 3rem) clamp(2rem, 8vh, 6rem);
+            padding: 0;
+            min-height: 60vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('IMG_4267 - Екатерина Абрамович.jpeg') center center / cover no-repeat;
+            background-color: #d4c8b8;
+            position: relative;
+        }
+        .final-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.25);
+            z-index: 1;
         }
         .final-block .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            position: relative;
+            z-index: 2;
+            padding: clamp(3rem, 10vh, 8rem) clamp(1rem, 5vw, 3rem);
+        }
+        .final-title {
+            font-family: 'Zeequada', cursive, serif;
+            font-weight: 700;
+            font-style: italic;
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            letter-spacing: 0.06em;
+            color: #ffffff !important;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3);
+            margin-bottom: 0;
+            line-height: 1.2;
         }
 
         /* ===== АДАПТИВНОСТЬ ===== */
@@ -421,11 +443,12 @@
             .timing-item { max-width: 240px; }
             .timer-circle { width: 50px; height: 50px; font-size: 1.2rem; border-width: 1.5px; }
             .timer-container { gap: 0.3rem; }
-            .final-title { font-size: 1.8rem; }
+            .final-title { font-size: 2rem !important; }
             .big-date { font-size: 2.2rem !important; }
             .map-container { max-width: 260px; }
             .greeting { font-size: 1.4rem; }
             .location-title, .wishes-title, .timer-title, .contacts-title { font-size: 1.3rem; }
+            .final-block { min-height: 50vh; }
         }
         @media (min-width: 361px) and (max-width: 480px) {
             .cloud-timing { max-width: 260px; }
@@ -435,6 +458,7 @@
             .timer-circle { width: 60px; height: 60px; font-size: 1.6rem; border-width: 2px; }
             .big-date { font-size: 2.8rem !important; }
             .map-container { max-width: 320px; }
+            .final-block { min-height: 50vh; }
         }
         @media (min-width: 481px) and (max-width: 768px) {
             .cloud-timing { max-width: 320px; }
@@ -444,6 +468,7 @@
             .timer-circle { width: 80px; height: 80px; font-size: 2rem; }
             .big-date { font-size: 3.5rem !important; }
             .map-container { max-width: 380px; }
+            .final-block { min-height: 50vh; }
         }
         @media (min-width: 769px) and (max-width: 1024px) {
             .cloud-timing { max-width: 360px; }
@@ -479,10 +504,11 @@
             .cloud-label { font-size: 0.8rem !important; }
             .timing-grid { gap: 0.05rem; }
             .timing-item { max-width: 220px; }
+            .final-block { min-height: 80vh; }
         }
         @media (prefers-color-scheme: dark) {
             body { background: #2a201c; }
-            .greeting, .location-title, .wishes-title, .timer-title, .contacts-title, .final-title {
+            .greeting, .location-title, .wishes-title, .timer-title, .contacts-title {
                 color: #e0d0c0;
             }
             .invitation-text, .wishes-text, .location-address, .contacts-text, .timer-label, .contacts-number {
@@ -496,6 +522,7 @@
             .map-container { background: #3a2a20; }
             .contacts-number { border-color: #6a5a4a; background: rgba(255,255,255,0.05); color: #c0b0a0 !important; }
             .cloud-time, .cloud-label { color: #e8e0d8 !important; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+            .final-block::before { background: rgba(0,0,0,0.4); }
         }
         @media (prefers-reduced-motion: reduce) {
             .fade-up, .fade-scale {
@@ -654,7 +681,7 @@
         </div>
     </section>
 
-    <!-- ===== ДЕВЯТЫЙ БЛОК (Финальный) ===== -->
+    <!-- ===== ДЕВЯТЫЙ БЛОК (Финальный с фото) ===== -->
     <section class="final-block" id="finalBlock">
         <div class="container">
             <h2 class="final-title fade-up">Мы очень Вас ждём!</h2>
@@ -712,11 +739,11 @@
             updateTimer();
             setInterval(updateTimer, 1000);
 
-            const images = ['главная.png', 'облако.png', 'гирлянда.png', 'вопрос.png'];
+            const images = ['главная.png', 'облако.png', 'гирлянда.png', 'вопрос.png', 'IMG_4267 - Екатерина Абрамович.jpeg'];
             images.forEach(src => {
                 const img = new Image();
                 img.onload = () => console.log(src + ' загружено');
-                img.onerror = () => console.warn('Файл ' + src + ' не найден');
+                img.onerror = () => console.warn('Файл ' + src + ' не найден, проверьте путь');
                 img.src = src;
             });
         })();
