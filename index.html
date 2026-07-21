@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Music Button</title>
+
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+
+body{
+
+height:100vh;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+background:#faf9f6;
+
+}
+
+
+.music{
+
+width:190px;
+height:190px;
+
+cursor:pointer;
+
+}
+
+
+
+
+.text-circle{
+
+transform-origin:center;
+
+animation:rotate 25s linear infinite;
+
+}
+
+
+
+@keyframes rotate{
+
+from{
+transform:rotate(0deg);
+}
+
+to{
+transform:rotate(360deg);
+}
+
+}
+
+
+
+.circle-text{
+
+font-family:"Cormorant Garamond","Times New Roman",serif;
+
+font-size:13px;
+
+letter-spacing:0.5px;
+
+fill:#111;
+
+}
+
+
+
+.main-circle{
+
+fill:none;
+
+stroke:#111;
+
+stroke-width:1.3;
+
+}
+
+
+
+
+@media(max-width:500px){
+
+.music{
+
+width:160px;
+height:160px;
+
+}
+
+
+.circle-text{
+
+font-size:11px;
+
+}
+
+}
+
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+
+<audio id="music" src="music.mp3"></audio>
+
+
+
+<div class="music" id="musicButton">
+
+
+
+<svg viewBox="0 0 200 200">
+
+
+<defs>
+
+
+<path
+
+id="circlePath"
+
+d="
+M100,100
+m-70,0
+a70,70 0 1,1 140,0
+a70,70 0 1,1 -140,0
+"
+
+/>
+
+
+</defs>
+
+
+
+
+
+
+<!-- текст -->
+
+
+<g class="text-circle">
+
+
+<text class="circle-text">
+
+
+<textPath href="#circlePath"
+startOffset="0%">
+
+ВКЛЮЧИТЕ МУЗЫКУ •
+
+</textPath>
+
+
+<textPath href="#circlePath"
+startOffset="33%">
+
+ВКЛЮЧИТЕ МУЗЫКУ •
+
+</textPath>
+
+
+<textPath href="#circlePath"
+startOffset="66%">
+
+ВКЛЮЧИТЕ МУЗЫКУ •
+
+</textPath>
+
+
+</text>
+
+
+</g>
+
+
+
+
+
+
+
+
+<!-- круг -->
+
+<circle
+
+cx="100"
+
+cy="100"
+
+r="58"
+
+class="main-circle"
+
+/>
+
+
+
+
+
+
+
+
+<!-- НОВЫЙ ДИНАМИК -->
+<!-- размер сохранён как раньше -->
+
+<g transform="translate(100 100) scale(0.42) translate(-100 -100)">
+
+
+
+<!-- корпус динамика -->
+
+<path
+
+d="
+M60 88
+L78 88
+L98 72
+L98 128
+L78 112
+L60 112
+Z"
+
+fill="#111"
+
+/>
+
+
+
+
+
+
+<!-- первая волна -->
+
+<path
+
+d="
+M112 87
+C128 94 128 106 112 113"
+
+fill="none"
+
+stroke="#111"
+
+stroke-width="6"
+
+stroke-linecap="round"
+
+/>
+
+
+
+
+
+
+
+<!-- вторая волна -->
+
+<path
+
+d="
+M126 74
+C154 90 154 110 126 126"
+
+fill="none"
+
+stroke="#111"
+
+stroke-width="6"
+
+stroke-linecap="round"
+
+/>
+
+
+
+</g>
+
+
+
+
+
+
+
+<!-- крест выключения -->
+
+<line
+
+x1="76"
+
+y1="76"
+
+x2="124"
+
+y2="124"
+
+stroke="#111"
+
+stroke-width="4"
+
+stroke-linecap="round"
+
+/>
+
+
+
+
+
+</svg>
+
+
+</div>
+
+
+
+
+
+
+
+<script>
+
+
+const button =
+document.getElementById("musicButton");
+
+
+const audio =
+document.getElementById("music");
+
+
+
+let playing=false;
+
+
+
+button.onclick=()=>{
+
+
+if(!playing){
+
+audio.play();
+
+playing=true;
+
+}
+
+else{
+
+audio.pause();
+
+playing=false;
+
+}
+
+}
+
+
+</script>
+
+
+
+</body>
+</html>
