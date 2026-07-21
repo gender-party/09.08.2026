@@ -246,6 +246,11 @@
             margin-bottom: 0.3rem;
         }
 
+        /* Уменьшен отступ между адресом и картой */
+        .location-address {
+            margin-bottom: 0.5rem;
+        }
+
         .map-container {
             width: 100%;
             max-width: 500px;
@@ -331,7 +336,7 @@
             display: flex;
             justify-content: center;
             gap: clamp(0.8rem, 2.5vw, 3rem);
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
             flex-wrap: wrap;
         }
         .timer-item {
@@ -367,10 +372,13 @@
             letter-spacing: 0.06em;
             text-transform: lowercase;
         }
+
+        /* Уменьшен отступ между таймером и картинкой "Вопрос" */
         .timer-image {
             max-width: 350px;
             width: 100%;
             margin: 0 auto;
+            margin-top: 0.3rem;
         }
         .timer-image img {
             width: 100%;
@@ -379,9 +387,9 @@
             border-radius: 16px;
         }
 
-        /* ===== КОНТАКТЫ ===== */
+        /* ===== КОНТАКТЫ — уменьшен отступ сверху ===== */
         .contacts-block {
-            padding-top: clamp(2rem, 8vh, 6rem);
+            padding-top: clamp(1rem, 3vh, 2.5rem);
         }
         .contacts-number {
             font-family: 'Gravity', 'Segoe UI', sans-serif;
@@ -480,6 +488,9 @@
             .photo-block {
                 max-width: 220px;
             }
+            .contacts-block {
+                padding-top: 0.8rem;
+            }
         }
         @media (max-width: 360px) {
             .cloud-timing {
@@ -523,6 +534,9 @@
             }
             .photo-block {
                 max-width: 160px;
+            }
+            .contacts-block {
+                padding-top: 0.5rem;
             }
         }
         @media (min-width: 1401px) {
@@ -591,6 +605,9 @@
             .final-title {
                 white-space: normal;
                 font-size: 2rem !important;
+            }
+            .contacts-block {
+                padding-top: 0.5rem;
             }
         }
         @media (prefers-color-scheme: dark) {
@@ -684,6 +701,7 @@
         <div class="container">
             <h2 class="location-title fade-up">Место проведения</h2>
             <div class="location-name fade-up">White House</div>
+            <!-- Уменьшен отступ между адресом и картой -->
             <div class="location-address fade-up">Городище (Щомыслицкий с/с), ул. Свободы, д.10</div>
             <div class="map-container fade-scale">
                 <iframe 
@@ -696,7 +714,7 @@
         </div>
     </section>
 
-    <!-- ===== ЧЕТВЁРТЫЙ БЛОК (Тайминг — облака вплотную) ===== -->
+    <!-- ===== ЧЕТВЁРТЫЙ БЛОК (Тайминг) ===== -->
     <section id="fourthBlock">
         <div class="container">
             <h2 class="timer-title fade-up">Тайминг</h2>
@@ -763,7 +781,7 @@
         </div>
     </section>
 
-    <!-- ===== ШЕСТОЙ БЛОК (Таймер) ===== -->
+    <!-- ===== ШЕСТОЙ БЛОК (Таймер + Вопрос) ===== -->
     <section id="sixthBlock">
         <div class="container">
             <h2 class="timer-title fade-up">Мы узнаем пол нашего малыша через...</h2>
@@ -791,7 +809,7 @@
         </div>
     </section>
 
-    <!-- ===== СЕДЬМОЙ БЛОК (Контакты) ===== -->
+    <!-- ===== СЕДЬМОЙ БЛОК (Контакты) — уменьшен отступ сверху ===== -->
     <section class="contacts-block" id="seventhBlock">
         <div class="container">
             <h2 class="contacts-title fade-up">Контакты</h2>
