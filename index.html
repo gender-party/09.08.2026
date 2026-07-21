@@ -261,39 +261,24 @@
         .timing-grid {
             display: flex;
             flex-direction: column;
-            gap: 2rem;
             align-items: center;
+            gap: 2.5rem;
             margin-top: 1rem;
-            width: 100%;
-        }
-        .timing-row {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 1rem 3rem;
             width: 100%;
         }
         .timing-item {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 0.8rem;
-            flex: 0 1 auto;
-        }
-        .timing-label {
-            font-family: 'Gravity', sans-serif;
-            font-weight: 400;
-            font-style: italic;
-            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-            color: #4a4a4a;
-            letter-spacing: 0.04em;
-            white-space: nowrap;
+            gap: 0.5rem;
+            width: 100%;
+            max-width: 300px;
         }
         .cloud-timing {
             position: relative;
-            width: clamp(140px, 25vw, 220px);
+            width: 100%;
+            max-width: 260px;
             aspect-ratio: 1/1;
-            flex-shrink: 0;
         }
         .cloud-timing img {
             width: 100%;
@@ -308,7 +293,7 @@
             transform: translate(-50%, -50%);
             font-family: 'Caveat', cursive !important;
             font-weight: 700 !important;
-            font-size: clamp(2.2rem, 5vw, 4rem) !important;
+            font-size: clamp(2.8rem, 6vw, 4.8rem) !important;
             color: #ffffff;
             text-shadow: 0 4px 20px rgba(0,0,0,0.25);
             letter-spacing: 0.04em;
@@ -318,13 +303,14 @@
             width: 90%;
             text-align: center;
         }
-
-        /* смещение в шахматном порядке */
-        .timing-row:nth-child(odd) .cloud-timing {
-            margin-right: 10%;
-        }
-        .timing-row:nth-child(even) .cloud-timing {
-            margin-left: 10%;
+        .timing-label {
+            font-family: 'Gravity', sans-serif;
+            font-weight: 400;
+            font-style: italic;
+            font-size: clamp(1.1rem, 2vw, 1.6rem);
+            color: #4a4a4a;
+            letter-spacing: 0.04em;
+            text-align: center;
         }
 
         /* ===== ПЯТЫЙ БЛОК (Пожелания) ===== */
@@ -413,7 +399,7 @@
             .fifth-block { padding: 6vh 4vw 2vh; }
             .contacts-block { padding-top: 8vh; }
             .map-container { max-width: 400px; }
-            .cloud-timing { width: clamp(120px, 22vw, 180px); }
+            .cloud-timing { max-width: 220px; }
         }
         @media (max-width: 768px) {
             section { padding: 4vh 3vw; }
@@ -423,19 +409,14 @@
             .fifth-block { padding: 5vh 3vw 1.5vh; }
             .contacts-block { padding-top: 6vh; }
             .map-container { max-width: 350px; }
-            .timing-row { gap: 0.5rem 1.5rem; }
-            .timing-row:nth-child(odd) .cloud-timing { margin-right: 5%; }
-            .timing-row:nth-child(even) .cloud-timing { margin-left: 5%; }
-            .cloud-timing { width: clamp(100px, 20vw, 150px); }
-            .cloud-timing .cloud-time { font-size: clamp(1.8rem, 4vw, 3rem) !important; }
+            .cloud-timing { max-width: 180px; }
+            .cloud-timing .cloud-time { font-size: clamp(2.2rem, 5vw, 3.6rem) !important; }
         }
         @media (max-width: 600px) {
             .big-date { font-size: clamp(4rem, 12vw, 6rem); white-space: nowrap; }
-            .timing-item { flex-direction: column; gap: 0.3rem; }
-            .cloud-timing { width: clamp(90px, 25vw, 130px); }
-            .timing-row:nth-child(odd) .cloud-timing { margin-right: 2%; }
-            .timing-row:nth-child(even) .cloud-timing { margin-left: 2%; }
-            .cloud-timing .cloud-time { font-size: clamp(1.6rem, 4.5vw, 2.6rem) !important; }
+            .cloud-timing { max-width: 150px; }
+            .cloud-timing .cloud-time { font-size: clamp(1.8rem, 4.5vw, 2.8rem) !important; }
+            .timing-item { max-width: 200px; }
         }
         @media (max-width: 480px) {
             section { padding: 3vh 3vw; }
@@ -449,9 +430,10 @@
             .greeting { margin-top: 2rem; }
             .contacts-block { padding-top: 4vh; }
             .map-container { max-width: 300px; }
-            .cloud-timing { width: clamp(80px, 22vw, 110px); }
-            .cloud-timing .cloud-time { font-size: clamp(1.4rem, 4vw, 2.2rem) !important; }
-            .timing-label { font-size: clamp(1rem, 3vw, 1.4rem); }
+            .cloud-timing { max-width: 130px; }
+            .cloud-timing .cloud-time { font-size: clamp(1.6rem, 4vw, 2.4rem) !important; }
+            .timing-label { font-size: clamp(1rem, 2.5vw, 1.2rem); }
+            .timing-item { max-width: 160px; }
         }
         @media (max-width: 360px) {
             .timer-circle { width: 50px; height: 50px; font-size: 1.2rem; border-width: 1.5px; }
@@ -459,8 +441,9 @@
             .final-title { font-size: 1.8rem; }
             .big-date { font-size: clamp(2.8rem, 9vw, 4rem); }
             .map-container { max-width: 260px; }
-            .cloud-timing { width: clamp(70px, 20vw, 90px); }
-            .cloud-timing .cloud-time { font-size: clamp(1.2rem, 3.5vw, 1.8rem) !important; }
+            .cloud-timing { max-width: 110px; }
+            .cloud-timing .cloud-time { font-size: clamp(1.2rem, 3.5vw, 2rem) !important; }
+            .timing-item { max-width: 140px; }
         }
         @media (max-width: 320px) {
             .timer-circle { width: 42px; height: 42px; font-size: 1rem; }
@@ -470,16 +453,17 @@
             .container { padding: 0 1vw; }
             .big-date { font-size: 2.5rem; }
             .map-container { max-width: 220px; }
-            .cloud-timing { width: clamp(60px, 18vw, 80px); }
-            .cloud-timing .cloud-time { font-size: clamp(1rem, 3vw, 1.4rem) !important; }
+            .cloud-timing { max-width: 90px; }
+            .cloud-timing .cloud-time { font-size: 1rem !important; }
+            .timing-item { max-width: 120px; }
         }
         @media (min-width: 1400px) {
             .container { max-width: 900px; }
             .timer-circle { width: 180px; height: 180px; font-size: 5.5rem; border-width: 3px; }
             .final-title { font-size: 6.5rem; }
             .map-container { max-width: 500px; }
-            .cloud-timing { width: 250px; }
-            .cloud-timing .cloud-time { font-size: 4.5rem !important; }
+            .cloud-timing { max-width: 300px; }
+            .cloud-timing .cloud-time { font-size: 5.5rem !important; }
         }
 
         @media (prefers-color-scheme: dark) {
@@ -513,7 +497,7 @@
             <h1 class="greeting fade-up">Дорогие родные и друзья</h1>
             <p class="invitation-text fade-up">Приглашаем вас разделить с нами этот особенный день, наполненный теплом, радостью и искренними эмоциями. Мы будем счастливы видеть каждого из вас в этот важный для нас момент.</p>
             <div class="divider fade-up"></div>
-            <div class="big-date fade-up">10.10.2026</div>
+            <div class="big-date fade-up">09.08.2026</div>
         </div>
     </section>
 
@@ -525,7 +509,7 @@
             <div class="location-address fade-up">Городище (Щомыслицкий с/с), ул. Свободы, д.10</div>
             <div class="map-container fade-scale">
                 <iframe 
-                    src="https://yandex.by/maps/29630/minsk-district/house/Zk4YdQZoT00DQFtpfXRzeH9mYw==/?ll=27.318684%2C53.829357&z=16.17&l=map&mode=search"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2352.447166445412!2d27.315623!3d53.829378!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dbd96a307139a7%3A0xe6893fc614d58df2!2z0YPQu9C40YbQsCDQodCy0L7QsdC-0LTRiyAxMCwg0JHQsNCz0YPRiNC-0LLQsA!5e0!3m2!1sru!2sby!4v1742034567890"
                     allowfullscreen>
                 </iframe>
             </div>
@@ -538,58 +522,55 @@
             <h2 class="timer-title fade-up">Тайминг</h2>
             <div class="timing-grid">
                 <!-- 15:00 -->
-                <div class="timing-row">
-                    <span class="timing-label fade-up">Сбор гостей</span>
+                <div class="timing-item fade-up">
                     <div class="cloud-timing fade-scale">
                         <img src="облако.png" alt="Облако" />
                         <div class="cloud-time">15:00</div>
                     </div>
+                    <span class="timing-label">Сбор гостей</span>
                 </div>
                 <!-- 15:30 -->
-                <div class="timing-row">
-                    <span class="timing-label fade-up">Момент Х</span>
+                <div class="timing-item fade-up">
                     <div class="cloud-timing fade-scale">
                         <img src="облако.png" alt="Облако" />
                         <div class="cloud-time">15:30</div>
                     </div>
+                    <span class="timing-label">Момент Х</span>
                 </div>
                 <!-- 17:30 -->
-                <div class="timing-row">
-                    <span class="timing-label fade-up">Фотосессия</span>
+                <div class="timing-item fade-up">
                     <div class="cloud-timing fade-scale">
                         <img src="облако.png" alt="Облако" />
                         <div class="cloud-time">17:30</div>
                     </div>
+                    <span class="timing-label">Фотосессия</span>
                 </div>
                 <!-- 18:00 -->
-                <div class="timing-row">
-                    <span class="timing-label fade-up">Праздничный ужин</span>
+                <div class="timing-item fade-up">
                     <div class="cloud-timing fade-scale">
                         <img src="облако.png" alt="Облако" />
                         <div class="cloud-time">18:00</div>
                     </div>
+                    <span class="timing-label">Праздничный ужин</span>
                 </div>
                 <!-- 21:00 -->
-                <div class="timing-row">
-                    <span class="timing-label fade-up">Завершение вечера</span>
+                <div class="timing-item fade-up">
                     <div class="cloud-timing fade-scale">
                         <img src="облако.png" alt="Облако" />
                         <div class="cloud-time">21:00</div>
                     </div>
+                    <span class="timing-label">Завершение вечера</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== ПЯТЫЙ БЛОК (Пожелания + цветы) ===== -->
+    <!-- ===== ПЯТЫЙ БЛОК (Пожелания) ===== -->
     <section class="fifth-block" id="fifthBlock">
         <div class="container">
             <h2 class="wishes-title fade-up">Пожелания</h2>
             <p class="wishes-text fade-up">
-                Будем рады, если гость принесёт 1 цветочек синего или розового цвета в зависимости от предполагаемого пола. Мы соберём красивый букет!
-            </p>
-            <p class="wishes-text fade-up" style="margin-top:1rem;">
-                Пусть этот день станет началом вашей самой красивой истории, наполненной любовью, смехом и бесконечным счастьем. Мы желаем вам быть друг для друга самой надёжной опорой и вдохновением на каждом шагу.
+                Будем рады, если каждый гость принесёт с собой один цветочек синего или розового цвета — в знак вашего предположения о поле нашего малыша. Из этих нежных лепестков мы соберём красивый букет, который станет символом вашей любви и поддержки в этот важный для нас день.
             </p>
         </div>
     </section>
@@ -668,9 +649,9 @@
                 animatedElements.forEach(el => el.classList.add('visible'));
             }
 
-            // --- Таймер ---
+            // --- Таймер до 09.08.2026 ---
             function updateTimer() {
-                const target = new Date('2026-10-10T17:00:00').getTime();
+                const target = new Date('2026-08-09T17:00:00').getTime(); // 9 августа 2026
                 const now = new Date().getTime();
                 let diff = target - now;
                 if (diff < 0) diff = 0;
