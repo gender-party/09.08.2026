@@ -1,385 +1,858 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>Приглашение</title>
+    <style>
+        @font-face {
+            font-family: 'Zeequada';
+            src: url('Zeequada.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Zeequada';
+            src: url('Zeequada.ttf') format('truetype');
+            font-weight: 700;
+            font-style: italic;
+            font-display: swap;
+        }
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        @font-face {
+            font-family: 'Gravity';
+            src: url('Gravity.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Gravity';
+            src: url('Gravity.ttf') format('truetype');
+            font-weight: 400;
+            font-style: italic;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Gravity';
+            src: url('Gravity.ttf') format('truetype');
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap;
+        }
 
-<title>Music Button</title>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap');
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+        body {
+            background: #fcf8f5;
+            font-family: 'Gravity', 'Segoe UI', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+            color: #3a3a3a;
+        }
 
+        section {
+            padding: 6vh 5vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-body{
+        .container {
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+            padding: 0 2vw;
+        }
 
-height:100vh;
+        /* ----- ПЕРВЫЙ ЭКРАН (фото) ----- */
+        .first-screen {
+            height: 100dvh;
+            width: 100%;
+            background: url('главная.png') center center / cover no-repeat;
+            background-color: #e8dccc;
+            transition: opacity 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 5vh;
+            padding: 0;
+        }
+        .first-screen:hover { opacity: 0.92; }
 
-display:flex;
-justify-content:center;
-align-items:center;
+        /* Индикатор прокрутки — теперь текст сверху, стрелка снизу, оба по центру */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 4vh;
+            left: 0;
+            right: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            animation: bounce 2.4s ease-in-out infinite;
+            z-index: 10;
+            padding: 0 20px;
+            pointer-events: none;
+        }
+        .scroll-text {
+            color: #ffffff;
+            font-family: 'Gravity', sans-serif;
+            font-weight: 300;
+            font-size: clamp(1.1rem, 2.4vw, 1.6rem);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+            opacity: 0.95;
+        }
+        .scroll-arrow {
+            width: 28px;
+            height: 28px;
+            border-right: 3px solid #ffffff;
+            border-bottom: 3px solid #ffffff;
+            transform: rotate(45deg);
+            transform-origin: center;
+            opacity: 0.85;
+            animation: arrowBounce 2.4s ease-in-out infinite;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
+            flex-shrink: 0;
+        }
+        @media (max-width: 480px) {
+            .scroll-indicator { gap: 0.4rem; }
+            .scroll-text { font-size: 0.85rem; letter-spacing: 0.15em; }
+            .scroll-arrow { width: 18px; height: 18px; border-width: 2px; }
+        }
 
-background:#faf9f6;
+        /* Анимация подпрыгивания всей группы */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes arrowBounce {
+            0%,100% { transform: rotate(45deg) translate(0,0); opacity:0.8; }
+            50% { transform: rotate(45deg) translate(4px,4px); opacity:1; }
+        }
 
-}
+        /* ----- БАЗОВЫЕ АНИМАЦИИ — замедлены до 1.2s ----- */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
+        .fade-scale {
+            opacity: 0;
+            transform: scale(0.92);
+            transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .fade-scale.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
 
-.music{
+        /* ----- ЗАГОЛОВКИ И ТЕКСТ ----- */
+        .greeting {
+            font-family: 'Zeequada', cursive;
+            font-weight: 700;
+            font-style: italic;
+            font-size: clamp(2.2rem, 6vw, 4.2rem);
+            color: #4a4a4a;
+            letter-spacing: 0.08em;
+            margin-top: 4rem;
+            margin-bottom: 1.8rem;
+            line-height: 1.2;
+            text-transform: uppercase;
+            word-break: break-word;
+        }
 
-width:190px;
-height:190px;
+        .location-title, .wishes-title, .dresscode-title, .timer-title, .vote-title, .contacts-title, .final-title {
+            font-family: 'Zeequada', cursive;
+            font-weight: 700;
+            font-style: italic;
+            font-size: clamp(2rem, 5vw, 3.6rem);
+            color: #4a4a4a;
+            letter-spacing: 0.12em;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
 
-cursor:pointer;
+        .final-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            letter-spacing: 0.06em;
+            margin-bottom: 0;
+        }
 
-}
+        .invitation-text, .wishes-text, .dresscode-text, .location-address, .contacts-text {
+            font-family: 'Gravity', sans-serif;
+            font-weight: 300;
+            font-style: italic;
+            font-size: clamp(1.1rem, 2.4vw, 1.6rem);
+            line-height: 1.8;
+            color: #5a5a5a;
+            max-width: 600px;
+            margin: 0 auto;
+            letter-spacing: 0.04em;
+            padding: 0 5px;
+        }
 
+        .divider {
+            width: clamp(50px, 8vw, 80px);
+            height: 2px;
+            background: #d4c8b8;
+            margin: 0 auto 2.2rem;
+            border-radius: 4px;
+        }
 
+        .big-date {
+            font-family: 'Caveat', cursive !important;
+            font-weight: 700 !important;
+            font-size: clamp(4.5rem, 14vw, 11rem) !important;
+            color: #d4b99a !important;
+            letter-spacing: 0.04em;
+            line-height: 1.1;
+            white-space: nowrap;
+            text-shadow: 2px 2px 0 rgba(212,185,154,0.15);
+            display: inline-block;
+            max-width: 100%;
+            padding: 0 5px;
+        }
 
+        /* ===== СБОР ГОСТЕЙ ===== */
+        .gathering-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(0.1rem, 0.3vw, 0.6rem);
+            width: 100%;
+            flex-wrap: wrap;
+        }
+        .gathering-text {
+            font-family: 'Gravity', sans-serif;
+            font-weight: 400;
+            font-style: italic;
+            font-size: clamp(1.8rem, 4vw, 3.2rem);
+            color: #4a4a4a;
+            letter-spacing: 0.08em;
+            line-height: 1.3;
+            flex: 0 1 auto;
+            white-space: nowrap;
+        }
+        .cloud-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            flex: 0 1 400px;
+            aspect-ratio: 1/1;
+        }
+        .cloud-wrapper img { width:100%; height:100%; object-fit:contain; display:block; }
+        .cloud-time {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            font-family: 'Caveat', cursive !important;
+            font-weight: 700 !important;
+            font-size: clamp(4rem, 12vw, 8rem) !important;
+            color: #ffffff;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.25);
+            letter-spacing: 0.04em;
+            line-height: 1.1;
+            pointer-events: none;
+            white-space: nowrap;
+        }
 
-.text-circle{
+        /* ===== МЕСТО ПРОВЕДЕНИЯ ===== */
+        .location-name {
+            font-family: 'Zeequada', cursive;
+            font-weight: 700;
+            font-style: italic;
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            color: #2a2a2a;
+            letter-spacing: 0.06em;
+            margin-bottom: 0.5rem;
+        }
 
-transform-origin:center;
+        .map-container {
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+            aspect-ratio: 1/1;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+            background: #e8e0d8;
+        }
+        .map-container iframe { width:100%; height:100%; border:0; display:block; }
 
-animation:rotate 25s linear infinite;
+        /* ===== ПЯТЫЙ БЛОК (Пожелания) ===== */
+        .fifth-block { padding: 8vh 5vw 2vh; }
 
-}
+        /* ===== ГИРЛЯНДА ===== */
+        .garland-wrapper {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .garland-wrapper img { width:100%; height:auto; display:block; border-radius:24px; }
 
+        /* ===== ДРЕСС-КОД ===== */
+        .dresscode-text { margin-bottom: 2.5rem; }
+        .dresscode-image {
+            max-width: 400px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        .dresscode-image img { width:100%; height:auto; display:block; border-radius:16px; }
 
+        /* ===== ТАЙМЕР ===== */
+        .timer-container {
+            display: flex;
+            justify-content: center;
+            gap: clamp(1.5rem, 3vw, 4rem);
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+        .timer-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .timer-circle {
+            width: clamp(100px, 14vw, 170px);
+            height: clamp(100px, 14vw, 170px);
+            border-radius: 50%;
+            background: transparent;
+            border: 3px solid #d4b99a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Gravity', sans-serif;
+            font-weight: 700;
+            font-size: clamp(3rem, 5vw, 5.5rem);
+            color: #2a2a2a;
+            box-shadow: 0 0 0 0 rgba(212,185,154,0.2);
+            margin-bottom: 0.8rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .timer-circle:hover { transform:scale(1.05); box-shadow:0 0 0 10px rgba(212,185,154,0.15); }
+        .timer-label {
+            font-family: 'Gravity', sans-serif;
+            font-weight: 300;
+            font-size: clamp(1rem, 1.6vw, 1.4rem);
+            color: #5a5a5a;
+            letter-spacing: 0.06em;
+            text-transform: lowercase;
+        }
+        .timer-image {
+            max-width: 400px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        .timer-image img { width:100%; height:auto; display:block; border-radius:16px; }
 
-@keyframes rotate{
+        /* ===== ГОЛОСОВАНИЕ ===== */
+        .vote-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.8rem;
+        }
+        .vote-form label {
+            font-family: 'Gravity', sans-serif;
+            font-weight: 400;
+            font-size: clamp(1rem, 1.6vw, 1.4rem);
+            color: #4a4a4a;
+            letter-spacing: 0.04em;
+            width: 100%;
+            max-width: 500px;
+            text-align: left;
+        }
+        .vote-form input[type="text"] {
+            width: 100%;
+            max-width: 500px;
+            padding: 0.8rem 1.2rem;
+            font-family: 'Gravity', sans-serif;
+            font-size: 1rem;
+            border: 1.5px solid #d4c8b8;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(2px);
+            transition: border-color 0.3s ease;
+            outline: none;
+        }
+        .vote-form input[type="text"]:focus { border-color:#d4b99a; }
 
-from{
-transform:rotate(0deg);
-}
+        .vote-radio-group {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: nowrap;
+            width: 100%;
+        }
+        .vote-radio-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            font-family: 'Gravity', sans-serif;
+            font-weight: 400;
+            font-size: clamp(1rem, 1.4vw, 1.2rem);
+            color: #4a4a4a;
+            padding: 0.5rem;
+        }
+        .vote-radio-item:hover { transform:scale(1.05); }
+        .vote-radio-item input[type="radio"] { display: none; }
+        .vote-radio-item img {
+            width: 220px;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 0.5rem;
+        }
+        .vote-radio-item input[type="radio"]:checked + img {
+            border-color: #d4b99a;
+            box-shadow: 0 0 0 8px rgba(212,185,154,0.25);
+        }
 
-to{
-transform:rotate(360deg);
-}
+        .presence-group {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+        .presence-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Gravity', sans-serif;
+            font-weight: 400;
+            font-size: clamp(1rem, 1.4vw, 1.2rem);
+            color: #4a4a4a;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            transition: background 0.2s;
+        }
+        .presence-item:hover { background: rgba(212,185,154,0.1); }
+        .presence-item input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #d4b99a;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
 
-}
+        .vote-submit-btn {
+            background: #d4b99a;
+            border: none;
+            padding: 0.8rem 2.5rem;
+            border-radius: 40px;
+            font-family: 'Gravity', sans-serif;
+            font-weight: 600;
+            font-size: clamp(1rem, 1.4vw, 1.2rem);
+            color: #ffffff;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 4px 16px rgba(212,185,154,0.3);
+        }
+        .vote-submit-btn:hover { background:#c4a88a; transform:translateY(-2px); }
+        .vote-submit-btn:active { transform:scale(0.97); }
 
+        /* ===== КОНТАКТЫ ===== */
+        .contacts-block { padding-top: 10vh; }
+        .contacts-number {
+            font-family: 'Gravity', sans-serif;
+            font-weight: 400;
+            font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+            color: #3a3a3a !important;
+            letter-spacing: 0.06em;
+            margin-top: 0.5rem;
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border: 2px solid #d4c8b8;
+            border-radius: 50px;
+            background: rgba(255,255,255,0.4);
+            text-decoration: none !important;
+        }
 
+        /* ===== ФИНАЛЬНЫЙ БЛОК ===== */
+        .final-block { padding: 4vh 5vw 10vh; }
+        .final-block .container { display: flex; flex-direction: column; align-items: center; }
 
-.circle-text{
+        /* ===== АДАПТИВНОСТЬ ===== */
+        @media (max-width: 1024px) {
+            section { padding: 5vh 4vw; }
+            .container { max-width: 650px; }
+            .timer-circle { width: clamp(90px, 12vw, 140px); height: clamp(90px, 12vw, 140px); font-size: clamp(2.5rem, 4vw, 4.2rem); }
+            .vote-radio-item img { width: 190px; height: 190px; }
+            .vote-radio-group { gap: 1.5rem; }
+            .fifth-block { padding: 6vh 4vw 2vh; }
+            .contacts-block { padding-top: 8vh; }
+            .map-container { max-width: 400px; }
+        }
+        @media (max-width: 768px) {
+            section { padding: 4vh 3vw; }
+            .container { max-width: 500px; }
+            .timer-circle { width: clamp(75px, 12vw, 110px); height: clamp(75px, 12vw, 110px); font-size: clamp(2rem, 3.5vw, 3rem); }
+            .vote-radio-item img { width: 160px; height: 160px; }
+            .vote-radio-group { gap: 1.2rem; }
+            .presence-group { gap: 1.5rem; }
+            .final-title { font-size: clamp(2.5rem, 7vw, 4.5rem); }
+            .fifth-block { padding: 5vh 3vw 1.5vh; }
+            .contacts-block { padding-top: 6vh; }
+            .map-container { max-width: 350px; }
+        }
+        @media (max-width: 600px) {
+            .vote-radio-group { flex-wrap: nowrap; gap: 0.8rem; }
+            .vote-radio-item img { width: 150px; height: 150px; }
+            .presence-group { flex-direction: row; flex-wrap: wrap; gap: 0.8rem; }
+            .big-date { font-size: clamp(4rem, 12vw, 6rem); white-space: nowrap; }
+            .presence-item { padding: 0.4rem 0.8rem; }
+        }
+        @media (max-width: 480px) {
+            section { padding: 3vh 3vw; }
+            .container { max-width: 380px; }
+            .timer-circle { width: clamp(60px, 14vw, 80px); height: clamp(60px, 14vw, 80px); font-size: clamp(1.6rem, 3.5vw, 2.2rem); border-width: 2px; }
+            .vote-radio-item img { width: 140px; height: 140px; }
+            .vote-radio-group { gap: 0.5rem; }
+            .presence-group { gap: 0.5rem; }
+            .contacts-number { font-size: clamp(1.2rem, 4vw, 1.6rem); padding: 0.4rem 1rem; }
+            .garland-wrapper img { border-radius: 16px; }
+            .final-title { font-size: clamp(2rem, 6vw, 3rem); }
+            .big-date { font-size: clamp(3.5rem, 10vw, 5rem); }
+            .fifth-block { padding: 4vh 3vw 1vh; }
+            .presence-item { padding: 0.3rem 0.6rem; font-size: 0.95rem; }
+            .vote-form input[type="text"] { font-size: 0.9rem; padding: 0.6rem 1rem; }
+            .greeting { margin-top: 2rem; }
+            .contacts-block { padding-top: 4vh; }
+            .map-container { max-width: 300px; }
+        }
+        @media (max-width: 360px) {
+            .timer-circle { width: 50px; height: 50px; font-size: 1.2rem; border-width: 1.5px; }
+            .vote-radio-item img { width: 130px; height: 130px; }
+            .timer-container { gap: 0.5rem; }
+            .vote-radio-group { gap: 0.3rem; }
+            .final-title { font-size: 1.8rem; }
+            .big-date { font-size: clamp(2.8rem, 9vw, 4rem); }
+            .presence-item { font-size: 0.85rem; padding: 0.2rem 0.5rem; }
+            .presence-item input[type="radio"] { width: 16px; height: 16px; }
+            .vote-submit-btn { padding: 0.6rem 1.8rem; font-size: 0.9rem; }
+            .map-container { max-width: 260px; }
+        }
+        @media (max-width: 320px) {
+            .timer-circle { width: 42px; height: 42px; font-size: 1rem; }
+            .vote-radio-item img { width: 120px; height: 120px; }
+            .vote-radio-item span { font-size: 0.8rem; }
+            .greeting { font-size: 1.6rem; }
+            .location-title, .wishes-title, .dresscode-title, .timer-title, .vote-title, .contacts-title { font-size: 1.4rem; }
+            .final-title { font-size: 1.6rem; }
+            .container { padding: 0 1vw; }
+            .big-date { font-size: 2.5rem; }
+            .map-container { max-width: 220px; }
+        }
+        @media (min-width: 1400px) {
+            .container { max-width: 900px; }
+            .timer-circle { width: 180px; height: 180px; font-size: 5.5rem; border-width: 3px; }
+            .vote-radio-item img { width: 240px; height: 240px; }
+            .final-title { font-size: 6.5rem; }
+            .map-container { max-width: 500px; }
+        }
 
-font-family:"Cormorant Garamond","Times New Roman",serif;
-
-font-size:13px;
-
-letter-spacing:0.5px;
-
-fill:#111;
-
-}
-
-
-
-.main-circle{
-
-fill:none;
-
-stroke:#111;
-
-stroke-width:1.3;
-
-}
-
-
-
-
-@media(max-width:500px){
-
-.music{
-
-width:160px;
-height:160px;
-
-}
-
-
-.circle-text{
-
-font-size:11px;
-
-}
-
-}
-
-
-
-</style>
-
+        @media (prefers-color-scheme: dark) {
+            body { background: #2a201c; }
+            .greeting, .location-title, .gathering-text, .wishes-title, .dresscode-title, .timer-title, .vote-title, .contacts-title, .final-title { color: #e0d0c0; }
+            .invitation-text, .wishes-text, .dresscode-text, .location-address, .contacts-text, .timer-label, .vote-form label, .vote-radio-item, .contacts-number { color: #c0b0a0; }
+            .location-name { color: #f0e0d0; }
+            .divider { background: #8a7a6a; }
+            .big-date { color: #c4a88a; }
+            .timer-circle { border-color: #c4a88a; color: #e0d0c0; }
+            .timer-circle:hover { box-shadow: 0 0 0 10px rgba(196,168,138,0.15); }
+            .vote-form input[type="text"] { background: rgba(255,255,255,0.1); color: #e0d0c0; border-color: #6a5a4a; }
+            .vote-form input[type="text"]:focus { border-color: #c4a88a; }
+            .vote-radio-item input[type="radio"]:checked + img { border-color: #c4a88a; box-shadow: 0 0 0 8px rgba(196,168,138,0.25); }
+            .vote-submit-btn { background: #8a7a6a; color: #1a1a1a; }
+            .vote-submit-btn:hover { background: #a09080; }
+            .map-container { background: #3a2a20; }
+            .contacts-number { border-color: #6a5a4a; background: rgba(255,255,255,0.05); color: #c0b0a0 !important; }
+            .presence-item input[type="radio"] { accent-color: #c4a88a; }
+            .presence-item:hover { background: rgba(196,168,138,0.1); }
+        }
+    </style>
 </head>
-
-
 <body>
 
-
-
-<audio id="music" src="music.mp3"></audio>
-
-
-
-<div class="music" id="musicButton">
-
-
-
-<svg viewBox="0 0 200 200">
-
-
-<defs>
-
-
-<path
-
-id="circlePath"
-
-d="
-M100,100
-m-70,0
-a70,70 0 1,1 140,0
-a70,70 0 1,1 -140,0
-"
-
-/>
-
-
-</defs>
-
-
-
-
-
-
-<!-- текст -->
-
-
-<g class="text-circle">
-
-
-<text class="circle-text">
-
-
-<textPath href="#circlePath"
-startOffset="0%">
-
-ВКЛЮЧИТЕ МУЗЫКУ •
-
-</textPath>
-
-
-<textPath href="#circlePath"
-startOffset="33%">
-
-ВКЛЮЧИТЕ МУЗЫКУ •
-
-</textPath>
-
-
-<textPath href="#circlePath"
-startOffset="66%">
-
-ВКЛЮЧИТЕ МУЗЫКУ •
-
-</textPath>
-
-
-</text>
-
-
-</g>
-
-
-
-
-
-
-
-
-<!-- круг -->
-
-<circle
-
-cx="100"
-
-cy="100"
-
-r="58"
-
-class="main-circle"
-
-/>
-
-
-
-
-
-
-
-
-<!-- НОВЫЙ ДИНАМИК -->
-<!-- размер сохранён как раньше -->
-
-<g transform="translate(100 100) scale(0.42) translate(-100 -100)">
-
-
-
-<!-- корпус динамика -->
-
-<path
-
-d="
-M60 88
-L78 88
-L98 72
-L98 128
-L78 112
-L60 112
-Z"
-
-fill="#111"
-
-/>
-
-
-
-
-
-
-<!-- первая волна -->
-
-<path
-
-d="
-M112 87
-C128 94 128 106 112 113"
-
-fill="none"
-
-stroke="#111"
-
-stroke-width="6"
-
-stroke-linecap="round"
-
-/>
-
-
-
-
-
-
-
-<!-- вторая волна -->
-
-<path
-
-d="
-M126 74
-C154 90 154 110 126 126"
-
-fill="none"
-
-stroke="#111"
-
-stroke-width="6"
-
-stroke-linecap="round"
-
-/>
-
-
-
-</g>
-
-
-
-
-
-
-
-<!-- крест выключения -->
-
-<line
-
-x1="76"
-
-y1="76"
-
-x2="124"
-
-y2="124"
-
-stroke="#111"
-
-stroke-width="4"
-
-stroke-linecap="round"
-
-/>
-
-
-
-
-
-</svg>
-
-
-</div>
-
-
-
-
-
-
-
-<script>
-
-
-const button =
-document.getElementById("musicButton");
-
-
-const audio =
-document.getElementById("music");
-
-
-
-let playing=false;
-
-
-
-button.onclick=()=>{
-
-
-if(!playing){
-
-audio.play();
-
-playing=true;
-
-}
-
-else{
-
-audio.pause();
-
-playing=false;
-
-}
-
-}
-
-
-</script>
-
-
+    <!-- ===== ПЕРВЫЙ ЭКРАН ===== -->
+    <section class="first-screen" id="firstScreen">
+        <div class="scroll-indicator">
+            <span class="scroll-text">Листайте вниз</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- ===== ВТОРОЙ БЛОК (приглашение) ===== -->
+    <section id="secondBlock">
+        <div class="container">
+            <h1 class="greeting fade-up">Дорогие родные и друзья</h1>
+            <p class="invitation-text fade-up">Приглашаем вас разделить с нами этот особенный день, наполненный теплом, радостью и искренними эмоциями. Мы будем счастливы видеть каждого из вас в этот важный для нас момент.</p>
+            <div class="divider fade-up"></div>
+            <div class="big-date fade-up">10.10.2026</div>
+        </div>
+    </section>
+
+    <!-- ===== ТРЕТИЙ БЛОК (Сбор гостей) ===== -->
+    <section id="thirdBlock">
+        <div class="container gathering-wrapper">
+            <span class="gathering-text fade-up">Сбор гостей</span>
+            <div class="cloud-wrapper fade-scale">
+                <img src="облако.png" alt="Облако" />
+                <div class="cloud-time">17.00</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ЧЕТВЁРТЫЙ БЛОК (Место проведения) ===== -->
+    <section id="fourthBlock">
+        <div class="container">
+            <h2 class="location-title fade-up">Место проведения</h2>
+            <div class="location-name fade-up">Роял Холл</div>
+            <div class="location-address fade-up">д. Чуденичи, Лесная ул., 2А</div>
+            <div class="map-container fade-scale">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2350.5361000000003!2d27.789486!3d54.1378565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dbb09bca0e2447%3A0x911c95a0b585f6d7!2z0KPQttCw0LTQsNGB0LDRkdCx0LAg0KHQsNC00YzQsdCwIFJveWFsIEhhbGw!5e0!3m2!1sru!2sby!4v1742034567890!5m2!1sru!2sby" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ПЯТЫЙ БЛОК (Пожелания) ===== -->
+    <section class="fifth-block" id="fifthBlock">
+        <div class="container">
+            <h2 class="wishes-title fade-up">Пожелания</h2>
+            <p class="wishes-text fade-up">Пусть этот день станет началом вашей самой красивой истории, наполненной любовью, смехом и бесконечным счастьем. Мы желаем вам быть друг для друга самой надёжной опорой и вдохновением на каждом шагу.</p>
+        </div>
+    </section>
+
+    <!-- ===== ШЕСТОЙ БЛОК (Гирлянда) ===== -->
+    <section id="sixthBlock">
+        <div class="garland-wrapper fade-scale">
+            <img src="гирлянда.png" alt="Гирлянда" />
+        </div>
+    </section>
+
+    <!-- ===== СЕДЬМОЙ БЛОК (Дресс-код) ===== -->
+    <section id="seventhBlock">
+        <div class="container">
+            <h2 class="dresscode-title fade-up">Дресс-код</h2>
+            <p class="dresscode-text fade-up">Просим вас поддержать нас и прийти в том цвете, который, по вашему ощущению, соответствует полу нашего будущего ребёнка. Пусть ваши наряды станут частью нашего маленького чуда!</p>
+            <div class="dresscode-image fade-scale">
+                <img src="шарики.png" alt="Шарики" />
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ВОСЬМОЙ БЛОК (Таймер + Вопрос) ===== -->
+    <section id="eighthBlock">
+        <div class="container">
+            <h2 class="timer-title fade-up">Мы узнаем пол нашего малыша через...</h2>
+            <div class="timer-container">
+                <div class="timer-item fade-up">
+                    <div class="timer-circle" id="days">00</div>
+                    <div class="timer-label"><span id="daysLabel">дней</span></div>
+                </div>
+                <div class="timer-item fade-up">
+                    <div class="timer-circle" id="hours">00</div>
+                    <div class="timer-label"><span id="hoursLabel">часов</span></div>
+                </div>
+                <div class="timer-item fade-up">
+                    <div class="timer-circle" id="minutes">00</div>
+                    <div class="timer-label"><span id="minutesLabel">минут</span></div>
+                </div>
+                <div class="timer-item fade-up">
+                    <div class="timer-circle" id="seconds">00</div>
+                    <div class="timer-label"><span id="secondsLabel">секунд</span></div>
+                </div>
+            </div>
+            <div class="timer-image fade-scale">
+                <img src="вопрос.png" alt="Вопрос" />
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ДЕВЯТЫЙ БЛОК (Голосование) ===== -->
+    <section id="ninthBlock">
+        <div class="container">
+            <h2 class="vote-title fade-up">Нам интересно узнать ваше мнение</h2>
+
+            <form class="vote-form" id="voteForm">
+                <label for="fullName" class="fade-up">Ваше имя и фамилия</label>
+                <input type="text" id="fullName" name="fullName" placeholder="Например, Анна Иванова" required class="fade-up" />
+
+                <label class="fade-up">Вы планируете быть с нами?</label>
+                <div class="presence-group fade-up">
+                    <label class="presence-item">
+                        <input type="radio" name="presence" value="yes" />
+                        Да, обязательно
+                    </label>
+                    <label class="presence-item">
+                        <input type="radio" name="presence" value="no" />
+                        Нет, не смогу
+                    </label>
+                </div>
+
+                <label class="fade-up">Как вы думаете, кого мы ждём?</label>
+                <div class="vote-radio-group fade-up">
+                    <label class="vote-radio-item">
+                        <input type="radio" name="gender" value="boy" />
+                        <img src="мальчик.png" alt="Мальчик" />
+                        <span>Мальчик</span>
+                    </label>
+                    <label class="vote-radio-item">
+                        <input type="radio" name="gender" value="girl" />
+                        <img src="девочка.png" alt="Девочка" />
+                        <span>Девочка</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="vote-submit-btn fade-up">Отправить</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ===== ДЕСЯТЫЙ БЛОК (Контакты) ===== -->
+    <section class="contacts-block" id="tenthBlock">
+        <div class="container">
+            <h2 class="contacts-title fade-up">Контакты</h2>
+            <p class="contacts-text fade-up">По всем вопросам вы можете связаться с нами:</p>
+            <div class="contacts-number fade-up">+7 (999) 123-45-67</div>
+        </div>
+    </section>
+
+    <!-- ===== ОДИННАДЦАТЫЙ БЛОК (Финальный) ===== -->
+    <section class="final-block" id="finalBlock">
+        <div class="container">
+            <h2 class="final-title fade-up">Мы очень Вас ждём !</h2>
+        </div>
+    </section>
+
+    <script>
+        (function() {
+            // --- Анимация появления элементов при прокрутке ---
+            const animatedElements = document.querySelectorAll('.fade-up, .fade-scale');
+
+            if (animatedElements.length > 0 && 'IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.15,
+                    rootMargin: '0px 0px -30px 0px'
+                });
+
+                animatedElements.forEach(el => observer.observe(el));
+            } else {
+                animatedElements.forEach(el => el.classList.add('visible'));
+            }
+
+            // --- Таймер ---
+            function updateTimer() {
+                const target = new Date('2026-10-10T17:00:00').getTime();
+                const now = new Date().getTime();
+                let diff = target - now;
+                if (diff < 0) diff = 0;
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = String(days).padStart(2, '0');
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+
+                document.getElementById('daysLabel').textContent = declension(days, 'день', 'дня', 'дней');
+                document.getElementById('hoursLabel').textContent = declension(hours, 'час', 'часа', 'часов');
+                document.getElementById('minutesLabel').textContent = declension(minutes, 'минута', 'минуты', 'минут');
+                document.getElementById('secondsLabel').textContent = declension(seconds, 'секунда', 'секунды', 'секунд');
+            }
+
+            function declension(number, one, two, five) {
+                const n = Math.abs(number) % 100;
+                const n1 = n % 10;
+                if (n > 10 && n < 20) return five;
+                if (n1 > 1 && n1 < 5) return two;
+                if (n1 === 1) return one;
+                return five;
+            }
+
+            updateTimer();
+            setInterval(updateTimer, 1000);
+
+            // --- Обработка формы ---
+            const form = document.getElementById('voteForm');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('fullName').value.trim();
+                const presence = form.querySelector('input[name="presence"]:checked');
+                const gender = form.querySelector('input[name="gender"]:checked');
+
+                if (!name) {
+                    alert('Пожалуйста, укажите ваше имя и фамилию.');
+                    return;
+                }
+                if (!presence) {
+                    alert('Пожалуйста, выберите, будете ли вы присутствовать.');
+                    return;
+                }
+                if (!gender) {
+                    alert('Пожалуйста, выберите, кого вы думаете мы ждём.');
+                    return;
+                }
+
+                const presenceText = presence.value === 'yes' ? 'Да, буду' : 'Нет, не смогу';
+                const genderText = gender.value === 'boy' ? 'Мальчика' : 'Девочку';
+                alert(`Спасибо, ${name}! Ваш голос учтён.\nПрисутствие: ${presenceText}\nВы выбрали: ${genderText}`);
+                form.reset();
+            });
+
+            // Проверка загрузки изображений
+            const images = ['главная.png', 'облако.png', 'гирлянда.png', 'шарики.png', 'вопрос.png', 'мальчик.png', 'девочка.png'];
+            images.forEach(src => {
+                const img = new Image();
+                img.onload = () => console.log(`${src} загружено`);
+                img.onerror = () => console.warn(`Файл ${src} не найден`);
+                img.src = src;
+            });
+        })();
+    </script>
 
 </body>
 </html>
