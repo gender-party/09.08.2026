@@ -94,7 +94,6 @@
         }
         .first-screen:hover { opacity: 0.92; }
 
-        /* Индикатор прокрутки — теперь текст сверху, стрелка снизу, оба по центру */
         .scroll-indicator {
             position: absolute;
             bottom: 4vh;
@@ -138,7 +137,6 @@
             .scroll-arrow { width: 18px; height: 18px; border-width: 2px; }
         }
 
-        /* Анимация подпрыгивания всей группы */
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
@@ -148,7 +146,7 @@
             50% { transform: rotate(45deg) translate(4px,4px); opacity:1; }
         }
 
-        /* ----- БАЗОВЫЕ АНИМАЦИИ — замедлены до 1.2s ----- */
+        /* ----- БАЗОВЫЕ АНИМАЦИИ ----- */
         .fade-up {
             opacity: 0;
             transform: translateY(40px);
@@ -184,7 +182,7 @@
             word-break: break-word;
         }
 
-        .location-title, .wishes-title, .dresscode-title, .timer-title, .vote-title, .contacts-title, .final-title {
+        .location-title, .wishes-title, .timer-title, .contacts-title, .final-title {
             font-family: 'Zeequada', cursive;
             font-weight: 700;
             font-style: italic;
@@ -201,7 +199,7 @@
             margin-bottom: 0;
         }
 
-        .invitation-text, .wishes-text, .dresscode-text, .location-address, .contacts-text {
+        .invitation-text, .wishes-text, .location-address, .contacts-text {
             font-family: 'Gravity', sans-serif;
             font-weight: 300;
             font-style: italic;
@@ -236,50 +234,6 @@
             padding: 0 5px;
         }
 
-        /* ===== СБОР ГОСТЕЙ ===== */
-        .gathering-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: clamp(0.1rem, 0.3vw, 0.6rem);
-            width: 100%;
-            flex-wrap: wrap;
-        }
-        .gathering-text {
-            font-family: 'Gravity', sans-serif;
-            font-weight: 400;
-            font-style: italic;
-            font-size: clamp(1.8rem, 4vw, 3.2rem);
-            color: #4a4a4a;
-            letter-spacing: 0.08em;
-            line-height: 1.3;
-            flex: 0 1 auto;
-            white-space: nowrap;
-        }
-        .cloud-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 400px;
-            flex: 0 1 400px;
-            aspect-ratio: 1/1;
-        }
-        .cloud-wrapper img { width:100%; height:100%; object-fit:contain; display:block; }
-        .cloud-time {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%,-50%);
-            font-family: 'Caveat', cursive !important;
-            font-weight: 700 !important;
-            font-size: clamp(4rem, 12vw, 8rem) !important;
-            color: #ffffff;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.25);
-            letter-spacing: 0.04em;
-            line-height: 1.1;
-            pointer-events: none;
-            white-space: nowrap;
-        }
-
         /* ===== МЕСТО ПРОВЕДЕНИЯ ===== */
         .location-name {
             font-family: 'Zeequada', cursive;
@@ -303,6 +257,76 @@
         }
         .map-container iframe { width:100%; height:100%; border:0; display:block; }
 
+        /* ===== ТАЙМИНГ (ОБЛАКА) ===== */
+        .timing-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+            margin-top: 1rem;
+            width: 100%;
+        }
+        .timing-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem 3rem;
+            width: 100%;
+        }
+        .timing-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex: 0 1 auto;
+        }
+        .timing-label {
+            font-family: 'Gravity', sans-serif;
+            font-weight: 400;
+            font-style: italic;
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            color: #4a4a4a;
+            letter-spacing: 0.04em;
+            white-space: nowrap;
+        }
+        .cloud-timing {
+            position: relative;
+            width: clamp(140px, 25vw, 220px);
+            aspect-ratio: 1/1;
+            flex-shrink: 0;
+        }
+        .cloud-timing img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+        .cloud-timing .cloud-time {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Caveat', cursive !important;
+            font-weight: 700 !important;
+            font-size: clamp(2.2rem, 5vw, 4rem) !important;
+            color: #ffffff;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.25);
+            letter-spacing: 0.04em;
+            line-height: 1.2;
+            pointer-events: none;
+            white-space: nowrap;
+            width: 90%;
+            text-align: center;
+        }
+
+        /* смещение в шахматном порядке */
+        .timing-row:nth-child(odd) .cloud-timing {
+            margin-right: 10%;
+        }
+        .timing-row:nth-child(even) .cloud-timing {
+            margin-left: 10%;
+        }
+
         /* ===== ПЯТЫЙ БЛОК (Пожелания) ===== */
         .fifth-block { padding: 8vh 5vw 2vh; }
 
@@ -313,15 +337,6 @@
             margin: 0 auto;
         }
         .garland-wrapper img { width:100%; height:auto; display:block; border-radius:24px; }
-
-        /* ===== ДРЕСС-КОД ===== */
-        .dresscode-text { margin-bottom: 2.5rem; }
-        .dresscode-image {
-            max-width: 400px;
-            width: 100%;
-            margin: 0 auto;
-        }
-        .dresscode-image img { width:100%; height:auto; display:block; border-radius:16px; }
 
         /* ===== ТАЙМЕР ===== */
         .timer-container {
@@ -369,118 +384,6 @@
         }
         .timer-image img { width:100%; height:auto; display:block; border-radius:16px; }
 
-        /* ===== ГОЛОСОВАНИЕ ===== */
-        .vote-form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.8rem;
-        }
-        .vote-form label {
-            font-family: 'Gravity', sans-serif;
-            font-weight: 400;
-            font-size: clamp(1rem, 1.6vw, 1.4rem);
-            color: #4a4a4a;
-            letter-spacing: 0.04em;
-            width: 100%;
-            max-width: 500px;
-            text-align: left;
-        }
-        .vote-form input[type="text"] {
-            width: 100%;
-            max-width: 500px;
-            padding: 0.8rem 1.2rem;
-            font-family: 'Gravity', sans-serif;
-            font-size: 1rem;
-            border: 1.5px solid #d4c8b8;
-            border-radius: 30px;
-            background: rgba(255,255,255,0.6);
-            backdrop-filter: blur(2px);
-            transition: border-color 0.3s ease;
-            outline: none;
-        }
-        .vote-form input[type="text"]:focus { border-color:#d4b99a; }
-
-        .vote-radio-group {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: nowrap;
-            width: 100%;
-        }
-        .vote-radio-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-            font-family: 'Gravity', sans-serif;
-            font-weight: 400;
-            font-size: clamp(1rem, 1.4vw, 1.2rem);
-            color: #4a4a4a;
-            padding: 0.5rem;
-        }
-        .vote-radio-item:hover { transform:scale(1.05); }
-        .vote-radio-item input[type="radio"] { display: none; }
-        .vote-radio-item img {
-            width: 220px;
-            height: 220px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 3px solid transparent;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-            margin-bottom: 0.5rem;
-        }
-        .vote-radio-item input[type="radio"]:checked + img {
-            border-color: #d4b99a;
-            box-shadow: 0 0 0 8px rgba(212,185,154,0.25);
-        }
-
-        .presence-group {
-            display: flex;
-            justify-content: center;
-            gap: 2.5rem;
-            flex-wrap: wrap;
-            width: 100%;
-        }
-        .presence-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-family: 'Gravity', sans-serif;
-            font-weight: 400;
-            font-size: clamp(1rem, 1.4vw, 1.2rem);
-            color: #4a4a4a;
-            cursor: pointer;
-            padding: 0.5rem 1rem;
-            border-radius: 30px;
-            transition: background 0.2s;
-        }
-        .presence-item:hover { background: rgba(212,185,154,0.1); }
-        .presence-item input[type="radio"] {
-            width: 20px;
-            height: 20px;
-            accent-color: #d4b99a;
-            cursor: pointer;
-            flex-shrink: 0;
-        }
-
-        .vote-submit-btn {
-            background: #d4b99a;
-            border: none;
-            padding: 0.8rem 2.5rem;
-            border-radius: 40px;
-            font-family: 'Gravity', sans-serif;
-            font-weight: 600;
-            font-size: clamp(1rem, 1.4vw, 1.2rem);
-            color: #ffffff;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.2s;
-            box-shadow: 0 4px 16px rgba(212,185,154,0.3);
-        }
-        .vote-submit-btn:hover { background:#c4a88a; transform:translateY(-2px); }
-        .vote-submit-btn:active { transform:scale(0.97); }
-
         /* ===== КОНТАКТЫ ===== */
         .contacts-block { padding-top: 10vh; }
         .contacts-number {
@@ -507,98 +410,90 @@
             section { padding: 5vh 4vw; }
             .container { max-width: 650px; }
             .timer-circle { width: clamp(90px, 12vw, 140px); height: clamp(90px, 12vw, 140px); font-size: clamp(2.5rem, 4vw, 4.2rem); }
-            .vote-radio-item img { width: 190px; height: 190px; }
-            .vote-radio-group { gap: 1.5rem; }
             .fifth-block { padding: 6vh 4vw 2vh; }
             .contacts-block { padding-top: 8vh; }
             .map-container { max-width: 400px; }
+            .cloud-timing { width: clamp(120px, 22vw, 180px); }
         }
         @media (max-width: 768px) {
             section { padding: 4vh 3vw; }
             .container { max-width: 500px; }
             .timer-circle { width: clamp(75px, 12vw, 110px); height: clamp(75px, 12vw, 110px); font-size: clamp(2rem, 3.5vw, 3rem); }
-            .vote-radio-item img { width: 160px; height: 160px; }
-            .vote-radio-group { gap: 1.2rem; }
-            .presence-group { gap: 1.5rem; }
             .final-title { font-size: clamp(2.5rem, 7vw, 4.5rem); }
             .fifth-block { padding: 5vh 3vw 1.5vh; }
             .contacts-block { padding-top: 6vh; }
             .map-container { max-width: 350px; }
+            .timing-row { gap: 0.5rem 1.5rem; }
+            .timing-row:nth-child(odd) .cloud-timing { margin-right: 5%; }
+            .timing-row:nth-child(even) .cloud-timing { margin-left: 5%; }
+            .cloud-timing { width: clamp(100px, 20vw, 150px); }
+            .cloud-timing .cloud-time { font-size: clamp(1.8rem, 4vw, 3rem) !important; }
         }
         @media (max-width: 600px) {
-            .vote-radio-group { flex-wrap: nowrap; gap: 0.8rem; }
-            .vote-radio-item img { width: 150px; height: 150px; }
-            .presence-group { flex-direction: row; flex-wrap: wrap; gap: 0.8rem; }
             .big-date { font-size: clamp(4rem, 12vw, 6rem); white-space: nowrap; }
-            .presence-item { padding: 0.4rem 0.8rem; }
+            .timing-item { flex-direction: column; gap: 0.3rem; }
+            .cloud-timing { width: clamp(90px, 25vw, 130px); }
+            .timing-row:nth-child(odd) .cloud-timing { margin-right: 2%; }
+            .timing-row:nth-child(even) .cloud-timing { margin-left: 2%; }
+            .cloud-timing .cloud-time { font-size: clamp(1.6rem, 4.5vw, 2.6rem) !important; }
         }
         @media (max-width: 480px) {
             section { padding: 3vh 3vw; }
             .container { max-width: 380px; }
             .timer-circle { width: clamp(60px, 14vw, 80px); height: clamp(60px, 14vw, 80px); font-size: clamp(1.6rem, 3.5vw, 2.2rem); border-width: 2px; }
-            .vote-radio-item img { width: 140px; height: 140px; }
-            .vote-radio-group { gap: 0.5rem; }
-            .presence-group { gap: 0.5rem; }
             .contacts-number { font-size: clamp(1.2rem, 4vw, 1.6rem); padding: 0.4rem 1rem; }
             .garland-wrapper img { border-radius: 16px; }
             .final-title { font-size: clamp(2rem, 6vw, 3rem); }
             .big-date { font-size: clamp(3.5rem, 10vw, 5rem); }
             .fifth-block { padding: 4vh 3vw 1vh; }
-            .presence-item { padding: 0.3rem 0.6rem; font-size: 0.95rem; }
-            .vote-form input[type="text"] { font-size: 0.9rem; padding: 0.6rem 1rem; }
             .greeting { margin-top: 2rem; }
             .contacts-block { padding-top: 4vh; }
             .map-container { max-width: 300px; }
+            .cloud-timing { width: clamp(80px, 22vw, 110px); }
+            .cloud-timing .cloud-time { font-size: clamp(1.4rem, 4vw, 2.2rem) !important; }
+            .timing-label { font-size: clamp(1rem, 3vw, 1.4rem); }
         }
         @media (max-width: 360px) {
             .timer-circle { width: 50px; height: 50px; font-size: 1.2rem; border-width: 1.5px; }
-            .vote-radio-item img { width: 130px; height: 130px; }
             .timer-container { gap: 0.5rem; }
-            .vote-radio-group { gap: 0.3rem; }
             .final-title { font-size: 1.8rem; }
             .big-date { font-size: clamp(2.8rem, 9vw, 4rem); }
-            .presence-item { font-size: 0.85rem; padding: 0.2rem 0.5rem; }
-            .presence-item input[type="radio"] { width: 16px; height: 16px; }
-            .vote-submit-btn { padding: 0.6rem 1.8rem; font-size: 0.9rem; }
             .map-container { max-width: 260px; }
+            .cloud-timing { width: clamp(70px, 20vw, 90px); }
+            .cloud-timing .cloud-time { font-size: clamp(1.2rem, 3.5vw, 1.8rem) !important; }
         }
         @media (max-width: 320px) {
             .timer-circle { width: 42px; height: 42px; font-size: 1rem; }
-            .vote-radio-item img { width: 120px; height: 120px; }
-            .vote-radio-item span { font-size: 0.8rem; }
             .greeting { font-size: 1.6rem; }
-            .location-title, .wishes-title, .dresscode-title, .timer-title, .vote-title, .contacts-title { font-size: 1.4rem; }
+            .location-title, .wishes-title, .timer-title, .contacts-title { font-size: 1.4rem; }
             .final-title { font-size: 1.6rem; }
             .container { padding: 0 1vw; }
             .big-date { font-size: 2.5rem; }
             .map-container { max-width: 220px; }
+            .cloud-timing { width: clamp(60px, 18vw, 80px); }
+            .cloud-timing .cloud-time { font-size: clamp(1rem, 3vw, 1.4rem) !important; }
         }
         @media (min-width: 1400px) {
             .container { max-width: 900px; }
             .timer-circle { width: 180px; height: 180px; font-size: 5.5rem; border-width: 3px; }
-            .vote-radio-item img { width: 240px; height: 240px; }
             .final-title { font-size: 6.5rem; }
             .map-container { max-width: 500px; }
+            .cloud-timing { width: 250px; }
+            .cloud-timing .cloud-time { font-size: 4.5rem !important; }
         }
 
         @media (prefers-color-scheme: dark) {
             body { background: #2a201c; }
-            .greeting, .location-title, .gathering-text, .wishes-title, .dresscode-title, .timer-title, .vote-title, .contacts-title, .final-title { color: #e0d0c0; }
-            .invitation-text, .wishes-text, .dresscode-text, .location-address, .contacts-text, .timer-label, .vote-form label, .vote-radio-item, .contacts-number { color: #c0b0a0; }
+            .greeting, .location-title, .wishes-title, .timer-title, .contacts-title, .final-title { color: #e0d0c0; }
+            .invitation-text, .wishes-text, .location-address, .contacts-text, .timer-label, .contacts-number { color: #c0b0a0; }
             .location-name { color: #f0e0d0; }
             .divider { background: #8a7a6a; }
             .big-date { color: #c4a88a; }
             .timer-circle { border-color: #c4a88a; color: #e0d0c0; }
             .timer-circle:hover { box-shadow: 0 0 0 10px rgba(196,168,138,0.15); }
-            .vote-form input[type="text"] { background: rgba(255,255,255,0.1); color: #e0d0c0; border-color: #6a5a4a; }
-            .vote-form input[type="text"]:focus { border-color: #c4a88a; }
-            .vote-radio-item input[type="radio"]:checked + img { border-color: #c4a88a; box-shadow: 0 0 0 8px rgba(196,168,138,0.25); }
-            .vote-submit-btn { background: #8a7a6a; color: #1a1a1a; }
-            .vote-submit-btn:hover { background: #a09080; }
             .map-container { background: #3a2a20; }
             .contacts-number { border-color: #6a5a4a; background: rgba(255,255,255,0.05); color: #c0b0a0 !important; }
-            .presence-item input[type="radio"] { accent-color: #c4a88a; }
-            .presence-item:hover { background: rgba(196,168,138,0.1); }
+            .timing-label { color: #c0b0a0; }
         }
     </style>
 </head>
@@ -622,37 +517,80 @@
         </div>
     </section>
 
-    <!-- ===== ТРЕТИЙ БЛОК (Сбор гостей) ===== -->
+    <!-- ===== ТРЕТИЙ БЛОК (Место проведения) ===== -->
     <section id="thirdBlock">
-        <div class="container gathering-wrapper">
-            <span class="gathering-text fade-up">Сбор гостей</span>
-            <div class="cloud-wrapper fade-scale">
-                <img src="облако.png" alt="Облако" />
-                <div class="cloud-time">17.00</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== ЧЕТВЁРТЫЙ БЛОК (Место проведения) ===== -->
-    <section id="fourthBlock">
         <div class="container">
             <h2 class="location-title fade-up">Место проведения</h2>
-            <div class="location-name fade-up">Роял Холл</div>
-            <div class="location-address fade-up">д. Чуденичи, Лесная ул., 2А</div>
+            <div class="location-name fade-up">White House</div>
+            <div class="location-address fade-up">Городище (Щомыслицкий с/с), ул. Свободы, д.10</div>
             <div class="map-container fade-scale">
                 <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2350.5361000000003!2d27.789486!3d54.1378565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dbb09bca0e2447%3A0x911c95a0b585f6d7!2z0KPQttCw0LTQsNGB0LDRkdCx0LAg0KHQsNC00YzQsdCwIFJveWFsIEhhbGw!5e0!3m2!1sru!2sby!4v1742034567890!5m2!1sru!2sby" 
+                    src="https://yandex.by/maps/29630/minsk-district/house/Zk4YdQZoT00DQFtpfXRzeH9mYw==/?ll=27.318684%2C53.829357&z=16.17&l=map&mode=search"
                     allowfullscreen>
                 </iframe>
             </div>
         </div>
     </section>
 
-    <!-- ===== ПЯТЫЙ БЛОК (Пожелания) ===== -->
+    <!-- ===== ЧЕТВЁРТЫЙ БЛОК (Тайминг) ===== -->
+    <section id="fourthBlock">
+        <div class="container">
+            <h2 class="timer-title fade-up">Тайминг</h2>
+            <div class="timing-grid">
+                <!-- 15:00 -->
+                <div class="timing-row">
+                    <span class="timing-label fade-up">Сбор гостей</span>
+                    <div class="cloud-timing fade-scale">
+                        <img src="облако.png" alt="Облако" />
+                        <div class="cloud-time">15:00</div>
+                    </div>
+                </div>
+                <!-- 15:30 -->
+                <div class="timing-row">
+                    <span class="timing-label fade-up">Момент Х</span>
+                    <div class="cloud-timing fade-scale">
+                        <img src="облако.png" alt="Облако" />
+                        <div class="cloud-time">15:30</div>
+                    </div>
+                </div>
+                <!-- 17:30 -->
+                <div class="timing-row">
+                    <span class="timing-label fade-up">Фотосессия</span>
+                    <div class="cloud-timing fade-scale">
+                        <img src="облако.png" alt="Облако" />
+                        <div class="cloud-time">17:30</div>
+                    </div>
+                </div>
+                <!-- 18:00 -->
+                <div class="timing-row">
+                    <span class="timing-label fade-up">Праздничный ужин</span>
+                    <div class="cloud-timing fade-scale">
+                        <img src="облако.png" alt="Облако" />
+                        <div class="cloud-time">18:00</div>
+                    </div>
+                </div>
+                <!-- 21:00 -->
+                <div class="timing-row">
+                    <span class="timing-label fade-up">Завершение вечера</span>
+                    <div class="cloud-timing fade-scale">
+                        <img src="облако.png" alt="Облако" />
+                        <div class="cloud-time">21:00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ПЯТЫЙ БЛОК (Пожелания + цветы) ===== -->
     <section class="fifth-block" id="fifthBlock">
         <div class="container">
             <h2 class="wishes-title fade-up">Пожелания</h2>
-            <p class="wishes-text fade-up">Пусть этот день станет началом вашей самой красивой истории, наполненной любовью, смехом и бесконечным счастьем. Мы желаем вам быть друг для друга самой надёжной опорой и вдохновением на каждом шагу.</p>
+            <p class="wishes-text fade-up">
+                Будем рады, если гость принесёт 1 цветочек синего или розового цвета в зависимости от предполагаемого пола. Мы соберём красивый букет!
+            </p>
+            <p class="wishes-text fade-up" style="margin-top:1rem;">
+                Пусть этот день станет началом вашей самой красивой истории, наполненной любовью, смехом и бесконечным счастьем. Мы желаем вам быть друг для друга самой надёжной опорой и вдохновением на каждом шагу.
+            </p>
         </div>
     </section>
 
@@ -663,19 +601,8 @@
         </div>
     </section>
 
-    <!-- ===== СЕДЬМОЙ БЛОК (Дресс-код) ===== -->
+    <!-- ===== СЕДЬМОЙ БЛОК (Таймер + Вопрос) ===== -->
     <section id="seventhBlock">
-        <div class="container">
-            <h2 class="dresscode-title fade-up">Дресс-код</h2>
-            <p class="dresscode-text fade-up">Просим вас поддержать нас и прийти в том цвете, который, по вашему ощущению, соответствует полу нашего будущего ребёнка. Пусть ваши наряды станут частью нашего маленького чуда!</p>
-            <div class="dresscode-image fade-scale">
-                <img src="шарики.png" alt="Шарики" />
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== ВОСЬМОЙ БЛОК (Таймер + Вопрос) ===== -->
-    <section id="eighthBlock">
         <div class="container">
             <h2 class="timer-title fade-up">Мы узнаем пол нашего малыша через...</h2>
             <div class="timer-container">
@@ -702,59 +629,19 @@
         </div>
     </section>
 
-    <!-- ===== ДЕВЯТЫЙ БЛОК (Голосование) ===== -->
-    <section id="ninthBlock">
-        <div class="container">
-            <h2 class="vote-title fade-up">Нам интересно узнать ваше мнение</h2>
-
-            <form class="vote-form" id="voteForm">
-                <label for="fullName" class="fade-up">Ваше имя и фамилия</label>
-                <input type="text" id="fullName" name="fullName" placeholder="Например, Анна Иванова" required class="fade-up" />
-
-                <label class="fade-up">Вы планируете быть с нами?</label>
-                <div class="presence-group fade-up">
-                    <label class="presence-item">
-                        <input type="radio" name="presence" value="yes" />
-                        Да, обязательно
-                    </label>
-                    <label class="presence-item">
-                        <input type="radio" name="presence" value="no" />
-                        Нет, не смогу
-                    </label>
-                </div>
-
-                <label class="fade-up">Как вы думаете, кого мы ждём?</label>
-                <div class="vote-radio-group fade-up">
-                    <label class="vote-radio-item">
-                        <input type="radio" name="gender" value="boy" />
-                        <img src="мальчик.png" alt="Мальчик" />
-                        <span>Мальчик</span>
-                    </label>
-                    <label class="vote-radio-item">
-                        <input type="radio" name="gender" value="girl" />
-                        <img src="девочка.png" alt="Девочка" />
-                        <span>Девочка</span>
-                    </label>
-                </div>
-
-                <button type="submit" class="vote-submit-btn fade-up">Отправить</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- ===== ДЕСЯТЫЙ БЛОК (Контакты) ===== -->
-    <section class="contacts-block" id="tenthBlock">
+    <!-- ===== ВОСЬМОЙ БЛОК (Контакты) ===== -->
+    <section class="contacts-block" id="eighthBlock">
         <div class="container">
             <h2 class="contacts-title fade-up">Контакты</h2>
             <p class="contacts-text fade-up">По всем вопросам вы можете связаться с нами:</p>
-            <div class="contacts-number fade-up">+7 (999) 123-45-67</div>
+            <div class="contacts-number fade-up">Антон +375297014028 @anton_estet</div>
         </div>
     </section>
 
-    <!-- ===== ОДИННАДЦАТЫЙ БЛОК (Финальный) ===== -->
+    <!-- ===== ДЕВЯТЫЙ БЛОК (Финальный) ===== -->
     <section class="final-block" id="finalBlock">
         <div class="container">
-            <h2 class="final-title fade-up">Мы очень Вас ждём !</h2>
+            <h2 class="final-title fade-up">Мы очень Вас ждём!</h2>
         </div>
     </section>
 
@@ -816,35 +703,8 @@
             updateTimer();
             setInterval(updateTimer, 1000);
 
-            // --- Обработка формы ---
-            const form = document.getElementById('voteForm');
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const name = document.getElementById('fullName').value.trim();
-                const presence = form.querySelector('input[name="presence"]:checked');
-                const gender = form.querySelector('input[name="gender"]:checked');
-
-                if (!name) {
-                    alert('Пожалуйста, укажите ваше имя и фамилию.');
-                    return;
-                }
-                if (!presence) {
-                    alert('Пожалуйста, выберите, будете ли вы присутствовать.');
-                    return;
-                }
-                if (!gender) {
-                    alert('Пожалуйста, выберите, кого вы думаете мы ждём.');
-                    return;
-                }
-
-                const presenceText = presence.value === 'yes' ? 'Да, буду' : 'Нет, не смогу';
-                const genderText = gender.value === 'boy' ? 'Мальчика' : 'Девочку';
-                alert(`Спасибо, ${name}! Ваш голос учтён.\nПрисутствие: ${presenceText}\nВы выбрали: ${genderText}`);
-                form.reset();
-            });
-
             // Проверка загрузки изображений
-            const images = ['главная.png', 'облако.png', 'гирлянда.png', 'шарики.png', 'вопрос.png', 'мальчик.png', 'девочка.png'];
+            const images = ['главная.png', 'облако.png', 'гирлянда.png', 'вопрос.png'];
             images.forEach(src => {
                 const img = new Image();
                 img.onload = () => console.log(`${src} загружено`);
