@@ -203,18 +203,19 @@
             padding: 0 5px;
         }
 
+        /* Увеличенный отступ между текстом и датой */
         .divider {
             width: clamp(40px, 8vw, 70px);
             height: 2px;
             background: #d4c8b8;
-            margin: 0 auto clamp(1rem, 2vh, 2rem);
+            margin: clamp(1.8rem, 4vh, 3.5rem) auto clamp(1.8rem, 4vh, 3.5rem); /* Увеличен отступ */
             border-radius: 4px;
         }
 
         .big-date {
             font-family: 'Caveat', 'Zeequada', cursive, serif !important;
             font-weight: 700 !important;
-            font-size: clamp(2.2rem, 7vw, 5.5rem) !important; /* Уменьшено в 2 раза */
+            font-size: clamp(2.2rem, 7vw, 5.5rem) !important;
             color: #d4b99a !important;
             letter-spacing: 0.04em;
             line-height: 1.1;
@@ -258,7 +259,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: clamp(1.5rem, 4vh, 3rem);
+            gap: clamp(0.5rem, 1.5vh, 1.2rem); /* Уменьшен отступ между облаками */
             margin-top: 0.5rem;
             width: 100%;
         }
@@ -267,12 +268,12 @@
             flex-direction: column;
             align-items: center;
             width: 100%;
-            max-width: 280px;
+            max-width: 340px; /* Увеличено для больших облаков */
         }
         .cloud-timing {
             position: relative;
             width: 100%;
-            max-width: 240px;
+            max-width: 300px; /* Увеличен размер облака */
             aspect-ratio: 1/1;
         }
         .cloud-timing img {
@@ -298,8 +299,8 @@
         .cloud-time {
             font-family: 'Gravity', 'Segoe UI', sans-serif;
             font-weight: 700;
-            font-size: clamp(1.8rem, 4.5vw, 3.8rem);
-            color: #1a1a1a; /* Чёрный цвет */
+            font-size: clamp(2rem, 5vw, 4.2rem);
+            color: #1a1a1a;
             line-height: 1.1;
             letter-spacing: 0.02em;
             text-shadow: 0 1px 3px rgba(255,255,255,0.3);
@@ -307,8 +308,8 @@
         .cloud-label {
             font-family: 'Gravity', 'Segoe UI', sans-serif;
             font-weight: 600;
-            font-size: clamp(0.8rem, 1.8vw, 1.4rem);
-            color: #1a1a1a; /* Чёрный цвет */
+            font-size: clamp(0.9rem, 2vw, 1.6rem);
+            color: #1a1a1a;
             letter-spacing: 0.04em;
             line-height: 1.2;
             text-shadow: 0 1px 3px rgba(255,255,255,0.3);
@@ -419,10 +420,10 @@
 
         /* Очень маленькие экраны (до 360px) */
         @media (max-width: 360px) {
-            .cloud-timing { max-width: 140px; }
-            .cloud-time { font-size: 1.6rem !important; }
+            .cloud-timing { max-width: 180px; }
+            .cloud-time { font-size: 1.8rem !important; }
             .cloud-label { font-size: 0.7rem !important; }
-            .timing-item { max-width: 160px; }
+            .timing-item { max-width: 200px; }
             .timer-circle { width: 50px; height: 50px; font-size: 1.2rem; border-width: 1.5px; }
             .timer-container { gap: 0.3rem; }
             .final-title { font-size: 1.8rem; }
@@ -434,10 +435,10 @@
 
         /* Маленькие телефоны (360-480px) */
         @media (min-width: 361px) and (max-width: 480px) {
-            .cloud-timing { max-width: 160px; }
-            .cloud-time { font-size: 1.8rem !important; }
+            .cloud-timing { max-width: 200px; }
+            .cloud-time { font-size: 2rem !important; }
             .cloud-label { font-size: 0.8rem !important; }
-            .timing-item { max-width: 180px; }
+            .timing-item { max-width: 220px; }
             .timer-circle { width: 60px; height: 60px; font-size: 1.6rem; border-width: 2px; }
             .big-date { font-size: 2.8rem !important; }
             .map-container { max-width: 280px; }
@@ -445,10 +446,10 @@
 
         /* Телефоны (480-768px) */
         @media (min-width: 481px) and (max-width: 768px) {
-            .cloud-timing { max-width: 190px; }
-            .cloud-time { font-size: 2.2rem !important; }
-            .cloud-label { font-size: 0.9rem !important; }
-            .timing-item { max-width: 220px; }
+            .cloud-timing { max-width: 240px; }
+            .cloud-time { font-size: 2.6rem !important; }
+            .cloud-label { font-size: 1rem !important; }
+            .timing-item { max-width: 260px; }
             .timer-circle { width: 80px; height: 80px; font-size: 2rem; }
             .big-date { font-size: 3.5rem !important; }
             .map-container { max-width: 350px; }
@@ -456,10 +457,10 @@
 
         /* Планшеты (768-1024px) */
         @media (min-width: 769px) and (max-width: 1024px) {
-            .cloud-timing { max-width: 210px; }
-            .cloud-time { font-size: 2.8rem !important; }
-            .cloud-label { font-size: 1.1rem !important; }
-            .timing-item { max-width: 250px; }
+            .cloud-timing { max-width: 270px; }
+            .cloud-time { font-size: 3.2rem !important; }
+            .cloud-label { font-size: 1.2rem !important; }
+            .timing-item { max-width: 290px; }
             .timer-circle { width: 100px; height: 100px; font-size: 2.8rem; }
             .big-date { font-size: 4.5rem !important; }
             .map-container { max-width: 400px; }
@@ -467,18 +468,18 @@
 
         /* Ноутбуки и десктопы (1024-1400px) */
         @media (min-width: 1025px) and (max-width: 1400px) {
-            .cloud-timing { max-width: 240px; }
-            .cloud-time { font-size: 3.2rem !important; }
-            .cloud-label { font-size: 1.2rem !important; }
+            .cloud-timing { max-width: 300px; }
+            .cloud-time { font-size: 3.8rem !important; }
+            .cloud-label { font-size: 1.4rem !important; }
             .timer-circle { width: 130px; height: 130px; font-size: 3.6rem; }
             .big-date { font-size: 5rem !important; }
         }
 
         /* Большие экраны (1400px+) */
         @media (min-width: 1401px) {
-            .cloud-timing { max-width: 280px; }
-            .cloud-time { font-size: 4rem !important; }
-            .cloud-label { font-size: 1.4rem !important; }
+            .cloud-timing { max-width: 340px; }
+            .cloud-time { font-size: 4.5rem !important; }
+            .cloud-label { font-size: 1.6rem !important; }
             .timer-circle { width: 160px; height: 160px; font-size: 4.8rem; }
             .big-date { font-size: 5.5rem !important; }
             .map-container { max-width: 500px; }
@@ -490,11 +491,11 @@
             .first-screen { height: 100vh; }
             .greeting { margin-top: 0.5rem; font-size: 1.6rem; }
             section { padding: 1.5rem 2vw; }
-            .cloud-timing { max-width: 120px; }
-            .cloud-time { font-size: 1.4rem !important; }
-            .cloud-label { font-size: 0.6rem !important; }
-            .timing-grid { gap: 0.8rem; }
-            .timing-item { max-width: 140px; }
+            .cloud-timing { max-width: 160px; }
+            .cloud-time { font-size: 1.8rem !important; }
+            .cloud-label { font-size: 0.7rem !important; }
+            .timing-grid { gap: 0.5rem; }
+            .timing-item { max-width: 180px; }
         }
 
         /* Тёмная тема */
@@ -563,7 +564,7 @@
             <div class="location-address fade-up">Городище (Щомыслицкий с/с), ул. Свободы, д.10</div>
             <div class="map-container fade-scale">
                 <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2352.447166445412!2d27.315623!3d53.829378!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dbd96a307139a7%3A0xe6893fc614d58df2!2z0YPQu9C40YbQsCDQodCy0L7QsdC-0LDRiyAxMCwg0JHQsNCz0YPRiNC-0LLQsA!5e0!3m2!1sru!2sby!4v1742034567890"
+                    src="https://yandex.by/maps/29630/minsk-district/house/Zk4YdQZoT00DQFtpfXRzeH9mYw==/?ll=27.318684%2C53.829357&z=16.17&l=map&mode=search"
                     allowfullscreen
                     loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade">
