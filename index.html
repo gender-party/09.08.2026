@@ -263,7 +263,7 @@
             display: block;
         }
 
-        /* ===== ТАЙМИНГ (ОБЛАКА В ШАХМАТНОМ ПОРЯДКЕ) ===== */
+        /* ===== ТАЙМИНГ (ОБЛАКА СО СМЕЩЕНИЕМ) ===== */
         .timing-grid {
             display: flex;
             flex-direction: column;
@@ -281,12 +281,12 @@
             max-width: 400px;
         }
 
-        /* Чередование отступов для шахматного порядка */
+        /* Смещение облаков влево-вправо */
         .timing-item:nth-child(odd) .cloud-timing {
-            margin-right: 10%;
+            transform: translateX(-15%);
         }
         .timing-item:nth-child(even) .cloud-timing {
-            margin-left: 10%;
+            transform: translateX(15%);
         }
 
         .cloud-timing {
@@ -294,6 +294,7 @@
             width: 100%;
             max-width: 380px;
             aspect-ratio: 1/1;
+            transition: transform 0.3s ease;
         }
         .cloud-timing img {
             width: 100%;
@@ -453,18 +454,18 @@
         /* ===== АДАПТИВНОСТЬ ===== */
         @media (max-width: 600px) {
             .timing-item:nth-child(odd) .cloud-timing {
-                margin-right: 5%;
+                transform: translateX(-8%);
             }
             .timing-item:nth-child(even) .cloud-timing {
-                margin-left: 5%;
+                transform: translateX(8%);
             }
         }
         @media (max-width: 480px) {
             .timing-item:nth-child(odd) .cloud-timing {
-                margin-right: 2%;
+                transform: translateX(-4%);
             }
             .timing-item:nth-child(even) .cloud-timing {
-                margin-left: 2%;
+                transform: translateX(4%);
             }
             .final-title {
                 white-space: normal;
@@ -491,6 +492,12 @@
             .location-title, .wishes-title, .timer-title, .contacts-title { font-size: 1.3rem; }
             .final-block { min-height: 80vh; }
             .photo-block { max-width: 180px; }
+            .timing-item:nth-child(odd) .cloud-timing {
+                transform: translateX(-2%);
+            }
+            .timing-item:nth-child(even) .cloud-timing {
+                transform: translateX(2%);
+            }
         }
         @media (min-width: 1401px) {
             .cloud-timing { max-width: 450px; }
@@ -501,6 +508,12 @@
             .map-container { max-width: 550px; }
             .container { max-width: 1000px; }
             .photo-block { max-width: 340px; }
+            .timing-item:nth-child(odd) .cloud-timing {
+                transform: translateX(-20%);
+            }
+            .timing-item:nth-child(even) .cloud-timing {
+                transform: translateX(20%);
+            }
         }
         @media (max-height: 500px) and (orientation: landscape) {
             .first-screen { height: 100vh; }
@@ -514,6 +527,12 @@
             .final-block { min-height: 150vh; }
             .photo-block { max-width: 160px; }
             .final-title { white-space: normal; font-size: 2rem !important; }
+            .timing-item:nth-child(odd) .cloud-timing {
+                transform: translateX(-6%);
+            }
+            .timing-item:nth-child(even) .cloud-timing {
+                transform: translateX(6%);
+            }
         }
         @media (prefers-color-scheme: dark) {
             body { background: #2a201c; }
@@ -586,7 +605,7 @@
         </div>
     </section>
 
-    <!-- ===== ЧЕТВЁРТЫЙ БЛОК (Тайминг в шахматном порядке) ===== -->
+    <!-- ===== ЧЕТВЁРТЫЙ БЛОК (Тайминг с облаками в шахматном порядке) ===== -->
     <section id="fourthBlock">
         <div class="container">
             <h2 class="timer-title fade-up">Тайминг</h2>
