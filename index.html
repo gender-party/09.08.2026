@@ -217,18 +217,18 @@
             padding: 0 5px;
         }
 
-        /* ===== ФОТО ПОСЛЕ ДАТЫ (прямоугольный блок) ===== */
-        .photo-after-date {
+        /* ===== ФОТО (прямоугольный блок, высота больше ширины) ===== */
+        .photo-block {
             margin-top: clamp(1.5rem, 3vh, 3rem);
-            max-width: 280px;
+            max-width: 340px; /* Увеличено */
             margin-left: auto;
             margin-right: auto;
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-            aspect-ratio: 3/4; /* Высота больше ширины */
+            aspect-ratio: 3/4;
         }
-        .photo-after-date img {
+        .photo-block img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -415,13 +415,13 @@
             word-break: break-word;
         }
 
-        /* ===== ФИНАЛЬНЫЙ БЛОК (с фото, высота увеличена в 2 раза) ===== */
+        /* ===== ФИНАЛЬНЫЙ БЛОК (с фото, высота уменьшена) ===== */
         .final-block {
             padding: 0;
-            min-height: 120vh; /* В 2 раза выше, чем было (было ~60vh) */
+            min-height: 90vh; /* Уменьшено с 120vh до 90vh */
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* Текст прижат к верху */
+            align-items: flex-start;
             background: url('IMG_4267 - Екатерина Абрамович.jpeg') center center / cover no-repeat;
             background-color: #d4c8b8;
             position: relative;
@@ -454,7 +454,8 @@
             text-shadow: 0 4px 30px rgba(0,0,0,0.6), 0 2px 10px rgba(0,0,0,0.4);
             margin-bottom: 0;
             line-height: 1.2;
-            padding-top: clamp(1rem, 3vh, 3rem); /* Отступ сверху */
+            padding-top: clamp(1rem, 3vh, 3rem);
+            white-space: nowrap; /* Текст на одной строке */
         }
 
         /* ===== АДАПТИВНОСТЬ ===== */
@@ -465,13 +466,13 @@
             .timing-item { max-width: 240px; }
             .timer-circle { width: 50px; height: 50px; font-size: 1.2rem; border-width: 1.5px; }
             .timer-container { gap: 0.3rem; }
-            .final-title { font-size: 2rem !important; }
+            .final-title { font-size: 2rem !important; white-space: normal; }
             .big-date { font-size: 2.2rem !important; }
             .map-container { max-width: 260px; }
             .greeting { font-size: 1.4rem; }
             .location-title, .wishes-title, .timer-title, .contacts-title { font-size: 1.3rem; }
-            .final-block { min-height: 100vh; }
-            .photo-after-date { max-width: 180px; }
+            .final-block { min-height: 70vh; }
+            .photo-block { max-width: 200px; }
         }
         @media (min-width: 361px) and (max-width: 480px) {
             .cloud-timing { max-width: 260px; }
@@ -481,8 +482,9 @@
             .timer-circle { width: 60px; height: 60px; font-size: 1.6rem; border-width: 2px; }
             .big-date { font-size: 2.8rem !important; }
             .map-container { max-width: 320px; }
-            .final-block { min-height: 100vh; }
-            .photo-after-date { max-width: 200px; }
+            .final-block { min-height: 70vh; }
+            .photo-block { max-width: 220px; }
+            .final-title { white-space: normal; }
         }
         @media (min-width: 481px) and (max-width: 768px) {
             .cloud-timing { max-width: 320px; }
@@ -492,8 +494,9 @@
             .timer-circle { width: 80px; height: 80px; font-size: 2rem; }
             .big-date { font-size: 3.5rem !important; }
             .map-container { max-width: 380px; }
-            .final-block { min-height: 100vh; }
-            .photo-after-date { max-width: 220px; }
+            .final-block { min-height: 70vh; }
+            .photo-block { max-width: 260px; }
+            .final-title { white-space: normal; }
         }
         @media (min-width: 769px) and (max-width: 1024px) {
             .cloud-timing { max-width: 360px; }
@@ -503,7 +506,7 @@
             .timer-circle { width: 100px; height: 100px; font-size: 2.8rem; }
             .big-date { font-size: 4.5rem !important; }
             .map-container { max-width: 420px; }
-            .photo-after-date { max-width: 240px; }
+            .photo-block { max-width: 300px; }
         }
         @media (min-width: 1025px) and (max-width: 1400px) {
             .cloud-timing { max-width: 400px; }
@@ -511,7 +514,7 @@
             .cloud-label { font-size: 1.6rem !important; }
             .timer-circle { width: 130px; height: 130px; font-size: 3.6rem; }
             .big-date { font-size: 5rem !important; }
-            .photo-after-date { max-width: 260px; }
+            .photo-block { max-width: 320px; }
         }
         @media (min-width: 1401px) {
             .cloud-timing { max-width: 450px; }
@@ -521,7 +524,7 @@
             .big-date { font-size: 5.5rem !important; }
             .map-container { max-width: 550px; }
             .container { max-width: 1000px; }
-            .photo-after-date { max-width: 280px; }
+            .photo-block { max-width: 340px; }
         }
         @media (max-height: 500px) and (orientation: landscape) {
             .first-screen { height: 100vh; }
@@ -532,8 +535,9 @@
             .cloud-label { font-size: 0.8rem !important; }
             .timing-grid { gap: 0.05rem; }
             .timing-item { max-width: 220px; }
-            .final-block { min-height: 150vh; }
-            .photo-after-date { max-width: 160px; }
+            .final-block { min-height: 120vh; }
+            .photo-block { max-width: 180px; }
+            .final-title { white-space: normal; }
         }
         @media (prefers-color-scheme: dark) {
             body { background: #2a201c; }
@@ -552,7 +556,7 @@
             .contacts-number { border-color: #6a5a4a; background: rgba(255,255,255,0.05); color: #c0b0a0 !important; }
             .cloud-time, .cloud-label { color: #e8e0d8 !important; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
             .final-block::before { background: rgba(0,0,0,0.5); }
-            .photo-after-date { box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+            .photo-block { box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
         }
         @media (prefers-reduced-motion: reduce) {
             .fade-up, .fade-scale {
@@ -584,8 +588,8 @@
             <div class="divider fade-up"></div>
             <div class="big-date fade-up">09.08.2026</div>
 
-            <!-- Фото после даты (прямоугольный блок, высота больше ширины) -->
-            <div class="photo-after-date fade-scale">
+            <!-- Фото после даты (увеличено) -->
+            <div class="photo-block fade-scale">
                 <img src="IMG_3173 - Екатерина Абрамович.jpeg" alt="Фото" loading="lazy" />
             </div>
         </div>
@@ -669,6 +673,10 @@
             <p class="wishes-text fade-up">
                 Будем рады, если каждый гость принесёт с собой один цветочек синего или розового цвета — в знак вашего предположения о поле нашего малыша. Из этих нежных лепестков мы соберём красивый букет, который станет символом вашей любви и поддержки в этот важный для нас день.
             </p>
+            <!-- Фото после пожеланий (такого же размера) -->
+            <div class="photo-block fade-scale">
+                <img src="IMG_4236 - Екатерина Абрамович.jpeg" alt="Фото" loading="lazy" />
+            </div>
         </div>
     </section>
 
@@ -716,7 +724,7 @@
         </div>
     </section>
 
-    <!-- ===== ДЕВЯТЫЙ БЛОК (Финальный с фото, высота увеличена) ===== -->
+    <!-- ===== ДЕВЯТЫЙ БЛОК (Финальный с фото, высота уменьшена) ===== -->
     <section class="final-block" id="finalBlock">
         <div class="container">
             <h2 class="final-title fade-up">Мы очень Вас ждём!</h2>
@@ -774,7 +782,7 @@
             updateTimer();
             setInterval(updateTimer, 1000);
 
-            const images = ['главная.png', 'облако.png', 'гирлянда.png', 'вопрос.png', 'IMG_4267 - Екатерина Абрамович.jpeg', 'IMG_3173 - Екатерина Абрамович.jpeg'];
+            const images = ['главная.png', 'облако.png', 'гирлянда.png', 'вопрос.png', 'IMG_4267 - Екатерина Абрамович.jpeg', 'IMG_3173 - Екатерина Абрамович.jpeg', 'IMG_4236 - Екатерина Абрамович.jpeg'];
             images.forEach(src => {
                 const img = new Image();
                 img.onload = () => console.log(src + ' загружено');
