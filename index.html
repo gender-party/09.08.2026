@@ -234,8 +234,7 @@
             margin-bottom: 0.3rem;
         }
 
-        .map-link {
-            display: block;
+        .map-container {
             width: 100%;
             max-width: 500px;
             margin: 0 auto;
@@ -244,37 +243,12 @@
             overflow: hidden;
             box-shadow: 0 12px 40px rgba(0,0,0,0.08);
             background: #e8e0d8;
-            position: relative;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-decoration: none;
         }
-        .map-link:hover {
-            transform: scale(1.02);
-            box-shadow: 0 16px 48px rgba(0,0,0,0.12);
-        }
-        .map-link img {
+        .map-container iframe {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            border: 0;
             display: block;
-        }
-        .map-link .map-address {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255,255,255,0.92);
-            padding: 0.5rem 1.2rem;
-            border-radius: 30px;
-            font-family: 'Gravity', sans-serif;
-            font-size: clamp(0.8rem, 1.2vw, 1rem);
-            color: #2a2a2a;
-            white-space: nowrap;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            pointer-events: none;
-            font-weight: 400;
-            letter-spacing: 0.02em;
         }
 
         /* ===== ТАЙМИНГ (ОБЛАКА) — минимальные отступы ===== */
@@ -449,7 +423,7 @@
             .timer-container { gap: 0.3rem; }
             .final-title { font-size: 1.8rem; }
             .big-date { font-size: 2.2rem !important; }
-            .map-link { max-width: 260px; }
+            .map-container { max-width: 260px; }
             .greeting { font-size: 1.4rem; }
             .location-title, .wishes-title, .timer-title, .contacts-title { font-size: 1.3rem; }
         }
@@ -460,7 +434,7 @@
             .timing-item { max-width: 280px; }
             .timer-circle { width: 60px; height: 60px; font-size: 1.6rem; border-width: 2px; }
             .big-date { font-size: 2.8rem !important; }
-            .map-link { max-width: 320px; }
+            .map-container { max-width: 320px; }
         }
         @media (min-width: 481px) and (max-width: 768px) {
             .cloud-timing { max-width: 320px; }
@@ -469,7 +443,7 @@
             .timing-item { max-width: 340px; }
             .timer-circle { width: 80px; height: 80px; font-size: 2rem; }
             .big-date { font-size: 3.5rem !important; }
-            .map-link { max-width: 380px; }
+            .map-container { max-width: 380px; }
         }
         @media (min-width: 769px) and (max-width: 1024px) {
             .cloud-timing { max-width: 360px; }
@@ -478,7 +452,7 @@
             .timing-item { max-width: 380px; }
             .timer-circle { width: 100px; height: 100px; font-size: 2.8rem; }
             .big-date { font-size: 4.5rem !important; }
-            .map-link { max-width: 420px; }
+            .map-container { max-width: 420px; }
         }
         @media (min-width: 1025px) and (max-width: 1400px) {
             .cloud-timing { max-width: 400px; }
@@ -493,7 +467,7 @@
             .cloud-label { font-size: 1.8rem !important; }
             .timer-circle { width: 160px; height: 160px; font-size: 4.8rem; }
             .big-date { font-size: 5.5rem !important; }
-            .map-link { max-width: 550px; }
+            .map-container { max-width: 550px; }
             .container { max-width: 1000px; }
         }
         @media (max-height: 500px) and (orientation: landscape) {
@@ -519,8 +493,7 @@
             .big-date { color: #c4a88a !important; }
             .timer-circle { border-color: #c4a88a; color: #e0d0c0; }
             .timer-circle:hover { box-shadow: 0 0 0 8px rgba(196,168,138,0.15); }
-            .map-link { background: #3a2a20; }
-            .map-link .map-address { background: rgba(30,30,30,0.92); color: #e0d0c0; }
+            .map-container { background: #3a2a20; }
             .contacts-number { border-color: #6a5a4a; background: rgba(255,255,255,0.05); color: #c0b0a0 !important; }
             .cloud-time, .cloud-label { color: #e8e0d8 !important; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
         }
@@ -562,19 +535,14 @@
             <h2 class="location-title fade-up">Место проведения</h2>
             <div class="location-name fade-up">White House</div>
             <div class="location-address fade-up">Городище (Щомыслицкий с/с), ул. Свободы, д.10</div>
-            <a 
-                href="https://www.google.com/maps/place/%D1%83%D0%BB%D0%B8%D1%86%D0%B0+%D0%A1%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D1%8B+2,+%D0%91%D0%B0%D0%B3%D1%83%D1%88%D0%BE%D0%B2%D0%B0,+%D0%9C%D1%96%D0%BD%D1%81%D0%BA%D0%B0%D1%8F+%D0%B2%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%86%D1%8C/@53.8304139,27.3162912,17z/data=!4m15!1m8!3m7!1s0x46dbd969f2e94f87:0xac38cfb5f7c9c893!2z0YPQu9C40YbQsCDQodCy0L7QsdC-0LDRiyAyLCDQkdCw0LPRg9GI0L7QstCwLCDQnNGW0L3RgdC60LDRjyDQstC-0LHQu9Cw0YHRhtGM!3b1!8m2!3d53.8304139!4d27.3188661!16s%2Fg%2F11jx5mkw3m!3m5!1s0x46dbd969f2e94f87:0xac38cfb5f7c9c893!8m2!3d53.8304139!4d27.3188661!16s%2Fg%2F11jx5mkw3m?entry=ttu&g_ep=EgoyMDI2MDcxMy4wIKXMDSoASAFQAw%3D%3D" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                class="map-link fade-scale"
-            >
-                <img 
-                    src="https://static-maps.yandex.ru/1.x/?ll=27.318998,53.830404&z=16&l=map&pt=27.318998,53.830404,pm2rdl&size=500,500" 
-                    alt="Карта места проведения" 
+            <div class="map-container fade-scale">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2352.447166445412!2d27.315623!3d53.829378!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dbd969f2e94f87%3A0xac38cfb5f7c9c893!2z0YPQu9C40YbQsCDQodCy0L7QsdC-0LDRiyAyLCDQkdCw0LPRg9GI0L7QstCwLCDQnNGW0L3RgdC60LDRjyDQstC-0LHQu9Cw0YHRhtGM!5e0!3m2!1sru!2sby!4v1742034567890"
+                    allowfullscreen
                     loading="lazy"
-                />
-                <div class="map-address">ул. Свободы, 10, Городище</div>
-            </a>
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
         </div>
     </section>
 
