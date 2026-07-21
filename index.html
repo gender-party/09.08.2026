@@ -263,13 +263,13 @@
             display: block;
         }
 
-        /* ===== ТАЙМИНГ (ХАОТИЧНЫЙ ПОРЯДОК С УМЕНЬШЕННЫМИ ОБЛАКАМИ) ===== */
+        /* ===== ТАЙМИНГ (ЗИГЗАГ: ЛЕВО → ПРАВО → ЛЕВО → ПРАВО → ЦЕНТР) ===== */
         .timing-grid {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 0.05rem;
-            margin-top: 0.2rem;
+            gap: 0.2rem;
+            margin-top: 0.3rem;
             width: 100%;
             position: relative;
         }
@@ -279,31 +279,31 @@
             flex-direction: column;
             align-items: center;
             width: 100%;
-            max-width: 300px;
+            max-width: 340px;
             position: relative;
         }
 
-        /* Каждое облако получает свою уникальную позицию + поворот */
+        /* Зигзаг: чётные — справа, нечётные — слева, последний — по центру */
         .timing-item:nth-child(1) .cloud-timing {
-            transform: translateX(-12%) translateY(0) rotate(-3deg);
+            transform: translateX(-25%) translateY(0);
         }
         .timing-item:nth-child(2) .cloud-timing {
-            transform: translateX(10%) translateY(-6%) rotate(4deg);
+            transform: translateX(25%) translateY(-4%);
         }
         .timing-item:nth-child(3) .cloud-timing {
-            transform: translateX(-6%) translateY(4%) rotate(-2deg);
+            transform: translateX(-25%) translateY(0);
         }
         .timing-item:nth-child(4) .cloud-timing {
-            transform: translateX(14%) translateY(-4%) rotate(3deg);
+            transform: translateX(25%) translateY(-4%);
         }
         .timing-item:nth-child(5) .cloud-timing {
-            transform: translateX(-8%) translateY(6%) rotate(-4deg);
+            transform: translateX(0) translateY(0); /* По центру */
         }
 
         .cloud-timing {
             position: relative;
             width: 100%;
-            max-width: 260px;
+            max-width: 280px;
             aspect-ratio: 1/1;
             transition: transform 0.3s ease;
         }
@@ -330,7 +330,7 @@
         .cloud-time {
             font-family: 'Gravity', 'Segoe UI', sans-serif;
             font-weight: 700;
-            font-size: clamp(1.8rem, 4vw, 3.8rem);
+            font-size: clamp(2rem, 4.5vw, 4rem);
             color: #1a1a1a;
             line-height: 1.1;
             letter-spacing: 0.02em;
@@ -339,7 +339,7 @@
         .cloud-label {
             font-family: 'Gravity', 'Segoe UI', sans-serif;
             font-weight: 600;
-            font-size: clamp(0.8rem, 1.6vw, 1.4rem);
+            font-size: clamp(0.9rem, 1.8vw, 1.5rem);
             color: #1a1a1a;
             letter-spacing: 0.04em;
             line-height: 1.2;
@@ -465,25 +465,25 @@
         /* ===== АДАПТИВНОСТЬ ===== */
         @media (max-width: 600px) {
             .timing-item:nth-child(1) .cloud-timing {
-                transform: translateX(-6%) translateY(0) rotate(-2deg);
+                transform: translateX(-15%) translateY(0);
             }
             .timing-item:nth-child(2) .cloud-timing {
-                transform: translateX(5%) translateY(-4%) rotate(2deg);
+                transform: translateX(15%) translateY(-3%);
             }
             .timing-item:nth-child(3) .cloud-timing {
-                transform: translateX(-3%) translateY(3%) rotate(-1deg);
+                transform: translateX(-15%) translateY(0);
             }
             .timing-item:nth-child(4) .cloud-timing {
-                transform: translateX(8%) translateY(-2%) rotate(2deg);
+                transform: translateX(15%) translateY(-3%);
             }
             .timing-item:nth-child(5) .cloud-timing {
-                transform: translateX(-4%) translateY(4%) rotate(-2deg);
+                transform: translateX(0) translateY(0);
             }
             .cloud-timing {
-                max-width: 200px;
+                max-width: 220px;
             }
             .timing-item {
-                max-width: 220px;
+                max-width: 260px;
             }
             .cloud-time {
                 font-size: 1.8rem !important;
@@ -494,25 +494,25 @@
         }
         @media (max-width: 480px) {
             .timing-item:nth-child(1) .cloud-timing {
-                transform: translateX(-3%) translateY(0) rotate(-1deg);
+                transform: translateX(-8%) translateY(0);
             }
             .timing-item:nth-child(2) .cloud-timing {
-                transform: translateX(3%) translateY(-2%) rotate(1deg);
+                transform: translateX(8%) translateY(-2%);
             }
             .timing-item:nth-child(3) .cloud-timing {
-                transform: translateX(-2%) translateY(2%) rotate(-1deg);
+                transform: translateX(-8%) translateY(0);
             }
             .timing-item:nth-child(4) .cloud-timing {
-                transform: translateX(4%) translateY(-1%) rotate(1deg);
+                transform: translateX(8%) translateY(-2%);
             }
             .timing-item:nth-child(5) .cloud-timing {
-                transform: translateX(-2%) translateY(2%) rotate(-1deg);
+                transform: translateX(0) translateY(0);
             }
             .cloud-timing {
-                max-width: 160px;
+                max-width: 180px;
             }
             .timing-item {
-                max-width: 180px;
+                max-width: 200px;
             }
             .cloud-time {
                 font-size: 1.5rem !important;
@@ -533,10 +533,10 @@
         }
         @media (max-width: 360px) {
             .cloud-timing {
-                max-width: 130px;
+                max-width: 140px;
             }
             .timing-item {
-                max-width: 150px;
+                max-width: 160px;
             }
             .cloud-time {
                 font-size: 1.2rem !important;
@@ -575,33 +575,33 @@
                 max-width: 160px;
             }
             .timing-item:nth-child(1) .cloud-timing {
-                transform: translateX(-2%) translateY(0) rotate(0deg);
+                transform: translateX(-4%) translateY(0);
             }
             .timing-item:nth-child(2) .cloud-timing {
-                transform: translateX(2%) translateY(-1%) rotate(0deg);
+                transform: translateX(4%) translateY(-1%);
             }
             .timing-item:nth-child(3) .cloud-timing {
-                transform: translateX(-1%) translateY(1%) rotate(0deg);
+                transform: translateX(-4%) translateY(0);
             }
             .timing-item:nth-child(4) .cloud-timing {
-                transform: translateX(2%) translateY(0) rotate(0deg);
+                transform: translateX(4%) translateY(-1%);
             }
             .timing-item:nth-child(5) .cloud-timing {
-                transform: translateX(-1%) translateY(1%) rotate(0deg);
+                transform: translateX(0) translateY(0);
             }
         }
         @media (min-width: 1401px) {
             .cloud-timing {
-                max-width: 300px;
+                max-width: 320px;
             }
             .timing-item {
-                max-width: 340px;
+                max-width: 380px;
             }
             .cloud-time {
-                font-size: 4.2rem !important;
+                font-size: 4.5rem !important;
             }
             .cloud-label {
-                font-size: 1.6rem !important;
+                font-size: 1.7rem !important;
             }
             .timer-circle {
                 width: 160px;
@@ -621,19 +621,19 @@
                 max-width: 340px;
             }
             .timing-item:nth-child(1) .cloud-timing {
-                transform: translateX(-14%) translateY(0) rotate(-4deg);
+                transform: translateX(-30%) translateY(0);
             }
             .timing-item:nth-child(2) .cloud-timing {
-                transform: translateX(12%) translateY(-8%) rotate(5deg);
+                transform: translateX(30%) translateY(-5%);
             }
             .timing-item:nth-child(3) .cloud-timing {
-                transform: translateX(-8%) translateY(6%) rotate(-3deg);
+                transform: translateX(-30%) translateY(0);
             }
             .timing-item:nth-child(4) .cloud-timing {
-                transform: translateX(16%) translateY(-6%) rotate(4deg);
+                transform: translateX(30%) translateY(-5%);
             }
             .timing-item:nth-child(5) .cloud-timing {
-                transform: translateX(-10%) translateY(8%) rotate(-5deg);
+                transform: translateX(0) translateY(0);
             }
         }
         @media (max-height: 500px) and (orientation: landscape) {
@@ -648,10 +648,10 @@
                 padding: 1.5rem 2vw;
             }
             .cloud-timing {
-                max-width: 150px;
+                max-width: 160px;
             }
             .timing-item {
-                max-width: 170px;
+                max-width: 180px;
             }
             .cloud-time {
                 font-size: 1.6rem !important;
@@ -660,7 +660,7 @@
                 font-size: 0.7rem !important;
             }
             .timing-grid {
-                gap: 0.02rem;
+                gap: 0.05rem;
             }
             .final-block {
                 min-height: 150vh;
@@ -673,19 +673,19 @@
                 font-size: 2rem !important;
             }
             .timing-item:nth-child(1) .cloud-timing {
-                transform: translateX(-4%) translateY(0) rotate(-1deg);
+                transform: translateX(-10%) translateY(0);
             }
             .timing-item:nth-child(2) .cloud-timing {
-                transform: translateX(4%) translateY(-2%) rotate(1deg);
+                transform: translateX(10%) translateY(-2%);
             }
             .timing-item:nth-child(3) .cloud-timing {
-                transform: translateX(-2%) translateY(2%) rotate(-1deg);
+                transform: translateX(-10%) translateY(0);
             }
             .timing-item:nth-child(4) .cloud-timing {
-                transform: translateX(5%) translateY(-1%) rotate(1deg);
+                transform: translateX(10%) translateY(-2%);
             }
             .timing-item:nth-child(5) .cloud-timing {
-                transform: translateX(-3%) translateY(2%) rotate(-1deg);
+                transform: translateX(0) translateY(0);
             }
         }
         @media (prefers-color-scheme: dark) {
@@ -791,12 +791,12 @@
         </div>
     </section>
 
-    <!-- ===== ЧЕТВЁРТЫЙ БЛОК (Тайминг с хаотичным порядком) ===== -->
+    <!-- ===== ЧЕТВЁРТЫЙ БЛОК (Тайминг — зигзаг) ===== -->
     <section id="fourthBlock">
         <div class="container">
             <h2 class="timer-title fade-up">Тайминг</h2>
             <div class="timing-grid">
-                <!-- 15:00 — Сбор гостей (сдвиг влево + лёгкий наклон) -->
+                <!-- 15:00 — Сбор гостей (СЛЕВА) -->
                 <div class="timing-item fade-up">
                     <div class="cloud-timing fade-scale">
                         <img src="облако.png" alt="Облако" loading="lazy" />
@@ -806,7 +806,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- 15:30 — Момент Х (сдвиг вправо + вверх + наклон) -->
+                <!-- 15:30 — Момент Х (СПРАВА) -->
                 <div class="timing-item fade-up">
                     <div class="cloud-timing fade-scale">
                         <img src="облако.png" alt="Облако" loading="lazy" />
@@ -816,7 +816,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- 17:30 — Фотосессия (сдвиг влево + вниз + наклон) -->
+                <!-- 17:30 — Фотосессия (СЛЕВА) -->
                 <div class="timing-item fade-up">
                     <div class="cloud-timing fade-scale">
                         <img src="облако.png" alt="Облако" loading="lazy" />
@@ -826,7 +826,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- 18:00 — Праздничный ужин (сдвиг вправо + вверх + наклон) -->
+                <!-- 18:00 — Праздничный ужин (СПРАВА) -->
                 <div class="timing-item fade-up">
                     <div class="cloud-timing fade-scale">
                         <img src="облако.png" alt="Облако" loading="lazy" />
@@ -836,7 +836,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- 21:00 — Завершение вечера (сдвиг влево + вниз + наклон) -->
+                <!-- 21:00 — Завершение вечера (ПО ЦЕНТРУ) -->
                 <div class="timing-item fade-up">
                     <div class="cloud-timing fade-scale">
                         <img src="облако.png" alt="Облако" loading="lazy" />
