@@ -6,7 +6,6 @@
     <meta name="format-detection" content="telephone=no" />
     <title>Приглашение</title>
     <style>
-        /* ----- ШРИФТЫ (с fallback) ----- */
         @font-face {
             font-family: 'Zeequada';
             src: url('Zeequada.ttf') format('truetype');
@@ -63,7 +62,6 @@
             min-height: 100vh;
         }
 
-        /* ----- ОБЩИЕ СТИЛИ ----- */
         section {
             padding: clamp(2rem, 6vh, 5rem) clamp(1rem, 5vw, 3rem);
             display: flex;
@@ -203,12 +201,11 @@
             padding: 0 5px;
         }
 
-        /* Увеличенный отступ между текстом и датой */
         .divider {
             width: clamp(40px, 8vw, 70px);
             height: 2px;
             background: #d4c8b8;
-            margin: clamp(1.8rem, 4vh, 3.5rem) auto clamp(1.8rem, 4vh, 3.5rem); /* Увеличен отступ */
+            margin: clamp(1.8rem, 4vh, 3.5rem) auto clamp(1.8rem, 4vh, 3.5rem);
             border-radius: 4px;
         }
 
@@ -239,19 +236,44 @@
 
         .map-container {
             width: 100%;
-            max-width: 450px;
+            max-width: 500px;
             margin: 0 auto;
             aspect-ratio: 1/1;
             border-radius: 24px;
             overflow: hidden;
             box-shadow: 0 12px 40px rgba(0,0,0,0.08);
             background: #e8e0d8;
+            position: relative;
         }
-        .map-container iframe {
+        .map-container img {
             width: 100%;
             height: 100%;
-            border: 0;
+            object-fit: cover;
             display: block;
+        }
+        .map-container .map-marker {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+            pointer-events: none;
+        }
+        .map-container .map-address {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.9);
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            font-family: 'Gravity', sans-serif;
+            font-size: clamp(0.8rem, 1.2vw, 1rem);
+            color: #2a2a2a;
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            pointer-events: none;
         }
 
         /* ===== ТАЙМИНГ (ОБЛАКА) ===== */
@@ -259,7 +281,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: clamp(0.5rem, 1.5vh, 1.2rem); /* Уменьшен отступ между облаками */
+            gap: clamp(0.3rem, 0.8vh, 0.8rem); /* Отступы уменьшены в 2 раза */
             margin-top: 0.5rem;
             width: 100%;
         }
@@ -268,12 +290,12 @@
             flex-direction: column;
             align-items: center;
             width: 100%;
-            max-width: 340px; /* Увеличено для больших облаков */
+            max-width: 400px;
         }
         .cloud-timing {
             position: relative;
             width: 100%;
-            max-width: 300px; /* Увеличен размер облака */
+            max-width: 380px; /* Облака стали больше */
             aspect-ratio: 1/1;
         }
         .cloud-timing img {
@@ -299,7 +321,7 @@
         .cloud-time {
             font-family: 'Gravity', 'Segoe UI', sans-serif;
             font-weight: 700;
-            font-size: clamp(2rem, 5vw, 4.2rem);
+            font-size: clamp(2.2rem, 5.5vw, 4.8rem);
             color: #1a1a1a;
             line-height: 1.1;
             letter-spacing: 0.02em;
@@ -308,7 +330,7 @@
         .cloud-label {
             font-family: 'Gravity', 'Segoe UI', sans-serif;
             font-weight: 600;
-            font-size: clamp(0.9rem, 2vw, 1.6rem);
+            font-size: clamp(1rem, 2.2vw, 1.8rem);
             color: #1a1a1a;
             letter-spacing: 0.04em;
             line-height: 1.2;
@@ -416,89 +438,73 @@
             align-items: center;
         }
 
-        /* ===== АДАПТИВНОСТЬ ДЛЯ ВСЕХ УСТРОЙСТВ ===== */
-
-        /* Очень маленькие экраны (до 360px) */
+        /* ===== АДАПТИВНОСТЬ ===== */
         @media (max-width: 360px) {
-            .cloud-timing { max-width: 180px; }
-            .cloud-time { font-size: 1.8rem !important; }
-            .cloud-label { font-size: 0.7rem !important; }
-            .timing-item { max-width: 200px; }
+            .cloud-timing { max-width: 220px; }
+            .cloud-time { font-size: 2rem !important; }
+            .cloud-label { font-size: 0.8rem !important; }
+            .timing-item { max-width: 240px; }
             .timer-circle { width: 50px; height: 50px; font-size: 1.2rem; border-width: 1.5px; }
             .timer-container { gap: 0.3rem; }
             .final-title { font-size: 1.8rem; }
             .big-date { font-size: 2.2rem !important; }
-            .map-container { max-width: 220px; }
+            .map-container { max-width: 260px; }
             .greeting { font-size: 1.4rem; }
             .location-title, .wishes-title, .timer-title, .contacts-title { font-size: 1.3rem; }
         }
-
-        /* Маленькие телефоны (360-480px) */
         @media (min-width: 361px) and (max-width: 480px) {
-            .cloud-timing { max-width: 200px; }
-            .cloud-time { font-size: 2rem !important; }
-            .cloud-label { font-size: 0.8rem !important; }
-            .timing-item { max-width: 220px; }
+            .cloud-timing { max-width: 260px; }
+            .cloud-time { font-size: 2.4rem !important; }
+            .cloud-label { font-size: 0.9rem !important; }
+            .timing-item { max-width: 280px; }
             .timer-circle { width: 60px; height: 60px; font-size: 1.6rem; border-width: 2px; }
             .big-date { font-size: 2.8rem !important; }
-            .map-container { max-width: 280px; }
+            .map-container { max-width: 320px; }
         }
-
-        /* Телефоны (480-768px) */
         @media (min-width: 481px) and (max-width: 768px) {
-            .cloud-timing { max-width: 240px; }
-            .cloud-time { font-size: 2.6rem !important; }
-            .cloud-label { font-size: 1rem !important; }
-            .timing-item { max-width: 260px; }
+            .cloud-timing { max-width: 320px; }
+            .cloud-time { font-size: 3rem !important; }
+            .cloud-label { font-size: 1.2rem !important; }
+            .timing-item { max-width: 340px; }
             .timer-circle { width: 80px; height: 80px; font-size: 2rem; }
             .big-date { font-size: 3.5rem !important; }
-            .map-container { max-width: 350px; }
+            .map-container { max-width: 380px; }
         }
-
-        /* Планшеты (768-1024px) */
         @media (min-width: 769px) and (max-width: 1024px) {
-            .cloud-timing { max-width: 270px; }
-            .cloud-time { font-size: 3.2rem !important; }
-            .cloud-label { font-size: 1.2rem !important; }
-            .timing-item { max-width: 290px; }
-            .timer-circle { width: 100px; height: 100px; font-size: 2.8rem; }
-            .big-date { font-size: 4.5rem !important; }
-            .map-container { max-width: 400px; }
-        }
-
-        /* Ноутбуки и десктопы (1024-1400px) */
-        @media (min-width: 1025px) and (max-width: 1400px) {
-            .cloud-timing { max-width: 300px; }
+            .cloud-timing { max-width: 360px; }
             .cloud-time { font-size: 3.8rem !important; }
             .cloud-label { font-size: 1.4rem !important; }
+            .timing-item { max-width: 380px; }
+            .timer-circle { width: 100px; height: 100px; font-size: 2.8rem; }
+            .big-date { font-size: 4.5rem !important; }
+            .map-container { max-width: 420px; }
+        }
+        @media (min-width: 1025px) and (max-width: 1400px) {
+            .cloud-timing { max-width: 400px; }
+            .cloud-time { font-size: 4.4rem !important; }
+            .cloud-label { font-size: 1.6rem !important; }
             .timer-circle { width: 130px; height: 130px; font-size: 3.6rem; }
             .big-date { font-size: 5rem !important; }
         }
-
-        /* Большие экраны (1400px+) */
         @media (min-width: 1401px) {
-            .cloud-timing { max-width: 340px; }
-            .cloud-time { font-size: 4.5rem !important; }
-            .cloud-label { font-size: 1.6rem !important; }
+            .cloud-timing { max-width: 450px; }
+            .cloud-time { font-size: 5rem !important; }
+            .cloud-label { font-size: 1.8rem !important; }
             .timer-circle { width: 160px; height: 160px; font-size: 4.8rem; }
             .big-date { font-size: 5.5rem !important; }
-            .map-container { max-width: 500px; }
+            .map-container { max-width: 550px; }
             .container { max-width: 1000px; }
         }
-
-        /* Альбомная ориентация на телефонах */
         @media (max-height: 500px) and (orientation: landscape) {
             .first-screen { height: 100vh; }
             .greeting { margin-top: 0.5rem; font-size: 1.6rem; }
             section { padding: 1.5rem 2vw; }
-            .cloud-timing { max-width: 160px; }
-            .cloud-time { font-size: 1.8rem !important; }
-            .cloud-label { font-size: 0.7rem !important; }
-            .timing-grid { gap: 0.5rem; }
-            .timing-item { max-width: 180px; }
+            .cloud-timing { max-width: 200px; }
+            .cloud-time { font-size: 2rem !important; }
+            .cloud-label { font-size: 0.8rem !important; }
+            .timing-grid { gap: 0.3rem; }
+            .timing-item { max-width: 220px; }
         }
-
-        /* Тёмная тема */
         @media (prefers-color-scheme: dark) {
             body { background: #2a201c; }
             .greeting, .location-title, .wishes-title, .timer-title, .contacts-title, .final-title {
@@ -513,26 +519,19 @@
             .timer-circle { border-color: #c4a88a; color: #e0d0c0; }
             .timer-circle:hover { box-shadow: 0 0 0 8px rgba(196,168,138,0.15); }
             .map-container { background: #3a2a20; }
+            .map-container .map-address { background: rgba(30,30,30,0.9); color: #e0d0c0; }
             .contacts-number { border-color: #6a5a4a; background: rgba(255,255,255,0.05); color: #c0b0a0 !important; }
             .cloud-time, .cloud-label { color: #e8e0d8 !important; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
         }
-
-        /* Отключение анимаций для людей с vestibular disorders */
         @media (prefers-reduced-motion: reduce) {
             .fade-up, .fade-scale {
                 opacity: 1 !important;
                 transform: none !important;
                 transition: none !important;
             }
-            .scroll-indicator {
-                animation: none !important;
-            }
-            .scroll-arrow {
-                animation: none !important;
-            }
-            .timer-circle:hover {
-                transform: none !important;
-            }
+            .scroll-indicator { animation: none !important; }
+            .scroll-arrow { animation: none !important; }
+            .timer-circle:hover { transform: none !important; }
         }
     </style>
 </head>
@@ -563,12 +562,14 @@
             <div class="location-name fade-up">White House</div>
             <div class="location-address fade-up">Городище (Щомыслицкий с/с), ул. Свободы, д.10</div>
             <div class="map-container fade-scale">
-                <iframe
-                    src="https://yandex.by/maps/29630/minsk-district/house/Zk4YdQZoT00DQFtpfXRzeH9mYw==/?ll=27.318684%2C53.829357&z=16.17&l=map&mode=search"
-                    allowfullscreen
+                <!-- Статичное изображение карты с меткой -->
+                <img 
+                    src="https://static-maps.yandex.ru/1.x/?ll=27.318684,53.829357&z=16&l=map&pt=27.318684,53.829357,pm2rdl" 
+                    alt="Карта места проведения" 
                     loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
+                />
+                <div class="map-marker">📍</div>
+                <div class="map-address">ул. Свободы, 10, Городище</div>
             </div>
         </div>
     </section>
@@ -578,7 +579,6 @@
         <div class="container">
             <h2 class="timer-title fade-up">Тайминг</h2>
             <div class="timing-grid">
-                <!-- 15:00 -->
                 <div class="timing-item fade-up">
                     <div class="cloud-timing fade-scale">
                         <img src="облако.png" alt="Облако" />
@@ -588,7 +588,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- 15:30 -->
                 <div class="timing-item fade-up">
                     <div class="cloud-timing fade-scale">
                         <img src="облако.png" alt="Облако" />
@@ -598,7 +597,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- 17:30 -->
                 <div class="timing-item fade-up">
                     <div class="cloud-timing fade-scale">
                         <img src="облако.png" alt="Облако" />
@@ -608,7 +606,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- 18:00 -->
                 <div class="timing-item fade-up">
                     <div class="cloud-timing fade-scale">
                         <img src="облако.png" alt="Облако" />
@@ -618,7 +615,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- 21:00 -->
                 <div class="timing-item fade-up">
                     <div class="cloud-timing fade-scale">
                         <img src="облако.png" alt="Облако" />
@@ -695,9 +691,7 @@
 
     <script>
         (function() {
-            // --- Анимация появления элементов при прокрутке ---
             const animatedElements = document.querySelectorAll('.fade-up, .fade-scale');
-
             if (animatedElements.length > 0 && 'IntersectionObserver' in window) {
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
@@ -706,17 +700,12 @@
                             observer.unobserve(entry.target);
                         }
                     });
-                }, {
-                    threshold: 0.12,
-                    rootMargin: '0px 0px -20px 0px'
-                });
-
+                }, { threshold: 0.12, rootMargin: '0px 0px -20px 0px' });
                 animatedElements.forEach(el => observer.observe(el));
             } else {
                 animatedElements.forEach(el => el.classList.add('visible'));
             }
 
-            // --- Таймер до 09.08.2026 ---
             function updateTimer() {
                 const target = new Date('2026-08-09T17:00:00').getTime();
                 const now = new Date().getTime();
@@ -751,12 +740,11 @@
             updateTimer();
             setInterval(updateTimer, 1000);
 
-            // Проверка загрузки изображений (без ошибок в консоли)
             const images = ['главная.png', 'облако.png', 'гирлянда.png', 'вопрос.png'];
             images.forEach(src => {
                 const img = new Image();
                 img.onload = () => console.log(src + ' загружено');
-                img.onerror = () => console.warn('Файл ' + src + ' не найден, проверьте путь');
+                img.onerror = () => console.warn('Файл ' + src + ' не найден');
                 img.src = src;
             });
         })();
