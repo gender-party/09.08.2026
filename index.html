@@ -6,6 +6,7 @@
     <meta name="format-detection" content="telephone=no" />
     <title>Приглашение</title>
     <style>
+        /* ... (весь ваш CSS без изменений) ... */
         @font-face {
             font-family: 'Zeequada';
             src: url('Zeequada.ttf') format('truetype');
@@ -267,7 +268,7 @@
             display: block;
         }
 
-        /* ===== ТАЙМИНГ — МАКСИМАЛЬНО БЛИЗКО ===== */
+        /* ===== ТАЙМИНГ ===== */
         .timing-grid {
             display: flex;
             flex-direction: column;
@@ -450,221 +451,81 @@
 
         /* ===== АДАПТИВНОСТЬ ===== */
         @media (max-width: 600px) {
-            .cloud-timing {
-                max-width: 220px;
-            }
-            .timing-item {
-                max-width: 240px;
-            }
-            .cloud-time {
-                font-size: 1.8rem !important;
-            }
-            .cloud-label {
-                font-size: 0.8rem !important;
-            }
+            .cloud-timing { max-width: 220px; }
+            .timing-item { max-width: 240px; }
+            .cloud-time { font-size: 1.8rem !important; }
+            .cloud-label { font-size: 0.8rem !important; }
         }
         @media (max-width: 480px) {
-            .cloud-timing {
-                max-width: 180px;
-            }
-            .timing-item {
-                max-width: 200px;
-            }
-            .cloud-time {
-                font-size: 1.5rem !important;
-            }
-            .cloud-label {
-                font-size: 0.7rem !important;
-            }
-            .final-title {
-                white-space: normal;
-                font-size: 2.2rem !important;
-            }
-            .final-block {
-                min-height: 90vh;
-            }
-            .photo-block {
-                max-width: 220px;
-            }
-            .contacts-block {
-                padding-top: 0.8rem;
-            }
+            .cloud-timing { max-width: 180px; }
+            .timing-item { max-width: 200px; }
+            .cloud-time { font-size: 1.5rem !important; }
+            .cloud-label { font-size: 0.7rem !important; }
+            .final-title { white-space: normal; font-size: 2.2rem !important; }
+            .final-block { min-height: 90vh; }
+            .photo-block { max-width: 220px; }
+            .contacts-block { padding-top: 0.8rem; }
         }
         @media (max-width: 360px) {
-            .cloud-timing {
-                max-width: 140px;
-            }
-            .timing-item {
-                max-width: 160px;
-            }
-            .cloud-time {
-                font-size: 1.2rem !important;
-            }
-            .cloud-label {
-                font-size: 0.6rem !important;
-            }
-            .timer-circle {
-                width: 50px;
-                height: 50px;
-                font-size: 1.2rem;
-                border-width: 1.5px;
-            }
-            .timer-container {
-                gap: 0.3rem;
-            }
-            .final-title {
-                font-size: 1.8rem !important;
-            }
-            .big-date {
-                font-size: 2.2rem !important;
-            }
-            .greeting {
-                font-size: 1.4rem;
-            }
-            .location-title, .wishes-title, .timer-title, .contacts-title {
-                font-size: 1.3rem;
-            }
-            .final-block {
-                min-height: 70vh;
-            }
-            .photo-block {
-                max-width: 160px;
-            }
-            .contacts-block {
-                padding-top: 0.5rem;
-            }
+            .cloud-timing { max-width: 140px; }
+            .timing-item { max-width: 160px; }
+            .cloud-time { font-size: 1.2rem !important; }
+            .cloud-label { font-size: 0.6rem !important; }
+            .timer-circle { width: 50px; height: 50px; font-size: 1.2rem; border-width: 1.5px; }
+            .timer-container { gap: 0.3rem; }
+            .final-title { font-size: 1.8rem !important; }
+            .big-date { font-size: 2.2rem !important; }
+            .greeting { font-size: 1.4rem; }
+            .location-title, .wishes-title, .timer-title, .contacts-title { font-size: 1.3rem; }
+            .final-block { min-height: 70vh; }
+            .photo-block { max-width: 160px; }
+            .contacts-block { padding-top: 0.5rem; }
         }
         @media (min-width: 1401px) {
-            .cloud-timing {
-                max-width: 320px;
-            }
-            .timing-item {
-                max-width: 340px;
-            }
-            .cloud-time {
-                font-size: 4.5rem !important;
-            }
-            .cloud-label {
-                font-size: 1.7rem !important;
-            }
-            .timer-circle {
-                width: 160px;
-                height: 160px;
-                font-size: 4.8rem;
-            }
-            .big-date {
-                font-size: 5.5rem !important;
-            }
-            .map-container {
-                max-width: 550px;
-            }
-            .container {
-                max-width: 1000px;
-            }
-            .photo-block {
-                max-width: 340px;
-            }
+            .cloud-timing { max-width: 320px; }
+            .timing-item { max-width: 340px; }
+            .cloud-time { font-size: 4.5rem !important; }
+            .cloud-label { font-size: 1.7rem !important; }
+            .timer-circle { width: 160px; height: 160px; font-size: 4.8rem; }
+            .big-date { font-size: 5.5rem !important; }
+            .map-container { max-width: 550px; }
+            .container { max-width: 1000px; }
+            .photo-block { max-width: 340px; }
         }
         @media (max-height: 500px) and (orientation: landscape) {
-            .first-screen {
-                height: 100vh;
-            }
-            .greeting {
-                margin-top: 0.5rem;
-                font-size: 1.6rem;
-            }
-            section {
-                padding: 1.5rem 2vw;
-            }
-            .cloud-timing {
-                max-width: 160px;
-            }
-            .timing-item {
-                max-width: 180px;
-            }
-            .cloud-time {
-                font-size: 1.6rem !important;
-            }
-            .cloud-label {
-                font-size: 0.7rem !important;
-            }
-            .timing-grid {
-                gap: 0.01rem;
-            }
-            .final-block {
-                min-height: 150vh;
-            }
-            .photo-block {
-                max-width: 140px;
-            }
-            .final-title {
-                white-space: normal;
-                font-size: 2rem !important;
-            }
-            .contacts-block {
-                padding-top: 0.5rem;
-            }
+            .first-screen { height: 100vh; }
+            .greeting { margin-top: 0.5rem; font-size: 1.6rem; }
+            section { padding: 1.5rem 2vw; }
+            .cloud-timing { max-width: 160px; }
+            .timing-item { max-width: 180px; }
+            .cloud-time { font-size: 1.6rem !important; }
+            .cloud-label { font-size: 0.7rem !important; }
+            .timing-grid { gap: 0.01rem; }
+            .final-block { min-height: 150vh; }
+            .photo-block { max-width: 140px; }
+            .final-title { white-space: normal; font-size: 2rem !important; }
+            .contacts-block { padding-top: 0.5rem; }
         }
         @media (prefers-color-scheme: dark) {
-            body {
-                background: #2a201c;
-            }
-            .greeting, .location-title, .wishes-title, .timer-title, .contacts-title {
-                color: #e0d0c0;
-            }
-            .invitation-text, .wishes-text, .location-address, .contacts-text, .timer-label, .contacts-number {
-                color: #c0b0a0;
-            }
-            .location-name {
-                color: #f0e0d0;
-            }
-            .divider {
-                background: #8a7a6a;
-            }
-            .big-date {
-                color: #c4a88a !important;
-            }
-            .timer-circle {
-                border-color: #c4a88a;
-                color: #e0d0c0;
-            }
-            .timer-circle:hover {
-                box-shadow: 0 0 0 8px rgba(196, 168, 138, 0.15);
-            }
-            .map-container {
-                background: #3a2a20;
-            }
-            .contacts-number {
-                border-color: #6a5a4a;
-                background: rgba(255, 255, 255, 0.05);
-                color: #c0b0a0 !important;
-            }
-            .cloud-time, .cloud-label {
-                color: #e8e0d8 !important;
-                text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
-            }
-            .final-block::before {
-                background: rgba(0, 0, 0, 0.5);
-            }
-            .photo-block {
-                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-            }
+            body { background: #2a201c; }
+            .greeting, .location-title, .wishes-title, .timer-title, .contacts-title { color: #e0d0c0; }
+            .invitation-text, .wishes-text, .location-address, .contacts-text, .timer-label, .contacts-number { color: #c0b0a0; }
+            .location-name { color: #f0e0d0; }
+            .divider { background: #8a7a6a; }
+            .big-date { color: #c4a88a !important; }
+            .timer-circle { border-color: #c4a88a; color: #e0d0c0; }
+            .timer-circle:hover { box-shadow: 0 0 0 8px rgba(196, 168, 138, 0.15); }
+            .map-container { background: #3a2a20; }
+            .contacts-number { border-color: #6a5a4a; background: rgba(255, 255, 255, 0.05); color: #c0b0a0 !important; }
+            .cloud-time, .cloud-label { color: #e8e0d8 !important; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5); }
+            .final-block::before { background: rgba(0, 0, 0, 0.5); }
+            .photo-block { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); }
         }
         @media (prefers-reduced-motion: reduce) {
-            .fade-up, .fade-scale {
-                opacity: 1 !important;
-                transform: none !important;
-                transition: none !important;
-            }
-            .scroll-indicator {
-                animation: none !important;
-            }
-            .scroll-arrow {
-                animation: none !important;
-            }
-            .timer-circle:hover {
-                transform: none !important;
-            }
+            .fade-up, .fade-scale { opacity: 1 !important; transform: none !important; transition: none !important; }
+            .scroll-indicator { animation: none !important; }
+            .scroll-arrow { animation: none !important; }
+            .timer-circle:hover { transform: none !important; }
         }
     </style>
 </head>
@@ -699,7 +560,7 @@
             <div class="location-address fade-up">Городище (Щомыслицкий с/с), ул. Свободы, д.10</div>
             <div class="map-container fade-scale">
                 <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2352.447166445412!2d27.317684!3d53.829357!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dbd96a307139a7%3A0xe6893fc614d58df2!2z0YPQu9C40YbQsCDQodCy0L7QsdC-0LDRiyAxMCwg0JHQsNCz0YPRiNC-0LLQsA!5e0!3m2!1sru!2sby!4v1742034567890"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2352.447166445412!2d27.317989!3d53.8293934!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dbd96a307139a7%3A0xe6893fc614d58df2!2z0YPQu9C40YbQsCDQodCy0L7QsdC-0LDRiyAxMCwg0JHQsNCz0YPRiNC-0LLQsA!5e0!3m2!1sru!2sby!4v1742034567890"
                     allowfullscreen
                     loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade">
@@ -708,7 +569,7 @@
         </div>
     </section>
 
-    <!-- ===== ЧЕТВЁРТЫЙ БЛОК (Тайминг) ===== -->
+    <!-- ===== ОСТАЛЬНЫЕ БЛОКИ (без изменений) ===== -->
     <section id="fourthBlock">
         <div class="container">
             <h2 class="timer-title fade-up">Тайминг</h2>
@@ -762,7 +623,6 @@
         </div>
     </section>
 
-    <!-- ===== ПЯТЫЙ БЛОК (Пожелания) ===== -->
     <section class="fifth-block" id="fifthBlock">
         <div class="container">
             <h2 class="wishes-title fade-up">Пожелания</h2>
@@ -775,7 +635,6 @@
         </div>
     </section>
 
-    <!-- ===== ШЕСТОЙ БЛОК (Таймер + Вопрос) ===== -->
     <section id="sixthBlock">
         <div class="container">
             <h2 class="timer-title fade-up">Мы узнаем пол нашего малыша через...</h2>
@@ -803,7 +662,6 @@
         </div>
     </section>
 
-    <!-- ===== СЕДЬМОЙ БЛОК (Контакты) ===== -->
     <section class="contacts-block" id="seventhBlock">
         <div class="container">
             <h2 class="contacts-title fade-up">Контакты</h2>
@@ -812,7 +670,6 @@
         </div>
     </section>
 
-    <!-- ===== ВОСЬМОЙ БЛОК (Финальный) ===== -->
     <section class="final-block" id="finalBlock">
         <div class="container">
             <h2 class="final-title fade-up">Мы очень Вас ждём!</h2>
