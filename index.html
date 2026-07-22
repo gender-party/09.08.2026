@@ -213,7 +213,7 @@
         }
         .location-address { margin-bottom: 0.5rem; }
 
-        /* ГЛАВНОЕ: КОНТЕЙНЕР ДЛЯ КАРТЫ */
+        /* КОНТЕЙНЕР ДЛЯ КАРТЫ */
         .map-container {
             width: 100%;
             max-width: 500px;
@@ -507,9 +507,9 @@
             <div class="location-name fade-up">White House</div>
             <div class="location-address fade-up">Городище (Щомыслицкий с/с), ул. Свободы, д.10</div>
             <div class="map-container fade-scale">
-                <!-- ИСПРАВЛЕННЫЙ iframe С МЕТКОЙ НА ДОМЕ -->
+                <!-- НОВЫЙ iframe С ЯВНЫМ УКАЗАНИЕМ КООРДИНАТ И МАСШТАБОМ -->
                 <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2352.447166445412!2d27.3186327!3d53.8293934!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dbd96a307139a7%3A0xe6893fc614d58df2!2z0YPQu9C40YbQsCDQodCy0L7QsdC-0LDRiyAxMCwg0JHQsNCz0YPRiNC-0LLQsA!5e0!3m2!1sru!2sby!4v1742034567890"
+                    src="https://www.google.com/maps?q=53.8293934,27.3186327&output=embed&z=19"
                     allowfullscreen
                     loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade">
@@ -518,7 +518,7 @@
         </div>
     </section>
 
-    <!-- ===== ОСТАЛЬНЫЕ БЛОКИ ===== -->
+    <!-- ===== ОСТАЛЬНЫЕ БЛОКИ (без изменений) ===== -->
     <section id="fourthBlock">
         <div class="container">
             <h2 class="timer-title fade-up">Тайминг</h2>
